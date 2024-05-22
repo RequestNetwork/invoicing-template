@@ -9,9 +9,11 @@ import { Account, toHex } from "viem";
 import { onboard } from "./connectWallet";
 import type { RequestNetwork } from "@requestnetwork/request-client.js";
 import { initializeRequestNetwork } from "./requestInit";
+import { WalletState } from "@web3-onboard/core";
 
 interface ContextType {
-  account: string;
+  wallet: WalletState | undefined;
+  requestNetwork: RequestNetwork | undefined;
   disconnect: () => void;
   connectWallet: () => void;
 }
@@ -20,8 +22,7 @@ const Context = createContext<ContextType | undefined>(undefined);
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork>();
-
-  const [account, setAccount] = useState("");
+  const [wallet, setWallet] = useState();
   const [error, setError] = useState<unknown>("");
   const [chainId, setChainId] = useState("");
   const [network, setNetwork] = useState(0);
@@ -32,7 +33,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       const wallets = await onboard.connectWallet();
       setIsLoading(true);
       const { accounts, chains, provider } = wallets[0];
-      setAccount(accounts[0].address);
+      setWallet(wallets[0] as any);
       setChainId(chains[0].id);
       await onboard.setChain({
         chainId: "0xaa36a7",
@@ -58,7 +59,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   };
 
   const refreshState = () => {
-    setAccount("");
+    setWallet(undefined);
     setChainId("");
     setRequestNetwork(undefined);
   };
@@ -66,9 +67,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   return (
     <Context.Provider
       value={{
-        account,
+        wallet,
         disconnect,
         connectWallet,
+        requestNetwork,
       }}
     >
       {children}

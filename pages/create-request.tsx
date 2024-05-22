@@ -1,7 +1,27 @@
-import React from "react";
+import("@requestnetwork/create-request-form");
+import { useEffect, useRef } from "react";
+import { config } from "@/utils/config";
+import { useAppContext } from "@/utils/context";
+import { CreateRequestFormProps } from "@/types";
 
-const CreateRequest = () => {
-  return <div>CreateRequest</div>;
-};
+export default function Home() {
+  const formRef = useRef<CreateRequestFormProps>(null);
+  const { wallet, requestNetwork } = useAppContext();
 
-export default CreateRequest;
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.config = config;
+
+      if (wallet && requestNetwork) {
+        formRef.current.signer = wallet.accounts[0].address;
+        formRef.current.requestNetwork = requestNetwork;
+      }
+    }
+  }, [wallet, requestNetwork]);
+
+  return (
+    <div>
+      <create-request-form ref={formRef} />
+    </div>
+  );
+}
