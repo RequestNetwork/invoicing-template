@@ -7,7 +7,7 @@ import { useAppContext } from "@/utils/context";
 import { truncateAddress } from "@/utils/walletUtils";
 
 const Navbar = () => {
-  const { account, connectWallet } = useAppContext();
+  const { wallet, connectWallet } = useAppContext();
   const router = useRouter();
   const links = [
     {
@@ -44,7 +44,11 @@ const Navbar = () => {
       </ul>
       <Button
         className="ml-auto"
-        text={account ? truncateAddress(account) : "Connect Wallet"}
+        text={
+          wallet
+            ? truncateAddress(wallet.accounts[0].address)
+            : "Connect Wallet"
+        }
         onClick={connectWallet}
       />
     </nav>
