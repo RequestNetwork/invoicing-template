@@ -39,7 +39,7 @@ export const onboardConfig = {
     },
     {
       id: "0x89",
-      token: "ETH",
+      token: "MATIC",
       rpcUrl: "https://1rpc.io/matic",
     },
   ],
