@@ -35,9 +35,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       const { accounts, chains, provider } = wallets[0];
       setWallet(wallets[0] as any);
       setChainId(chains[0].id);
-      await onboard.setChain({
-        chainId: "0xaa36a7",
-      });
 
       await initializeRequestNetwork(
         accounts[0].address,

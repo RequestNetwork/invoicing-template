@@ -34,9 +34,13 @@ export const onboard = Onboard({
       rpcUrl: "https://eth.llamarpc.com",
     },
     {
-      id: "0xaa36a7",
+      id: "0x11155111",
       token: "ETH",
       rpcUrl: "https://sepolia.drpc.org",
+    },
+    {
+      id: "0x4",
+      token: "ETH",
     },
   ],
   appMetadata: {

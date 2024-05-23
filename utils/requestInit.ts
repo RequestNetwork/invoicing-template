@@ -11,7 +11,7 @@ export const initializeRequestNetwork = async (
 
     const requestNetwork = new RequestNetwork({
       nodeConnectionConfig: {
-        baseURL: "https://sepolia.gateway.request.network/",
+        baseURL: "https://gnosis.gateway.request.network/",
       },
       signatureProvider: web3SignatureProvider,
     });
