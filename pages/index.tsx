@@ -3,10 +3,12 @@ import { useEffect, useRef } from "react";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { InvoiceDashboardProps } from "@/types";
+import { useConnectWallet } from "@web3-onboard/react";
 
 export default function Home() {
+  const [{ wallet }] = useConnectWallet();
+  const { requestNetwork } = useAppContext();
   const dashboardRef = useRef<InvoiceDashboardProps>(null);
-  const { wallet, requestNetwork } = useAppContext();
 
   useEffect(() => {
     if (dashboardRef.current) {
@@ -17,6 +19,8 @@ export default function Home() {
         dashboardRef.current.requestNetwork = requestNetwork;
       }
     }
+
+    console.log(wallet);
   }, [wallet, requestNetwork]);
 
   return (

@@ -1,4 +1,3 @@
-import Onboard from "@web3-onboard/core";
 import safeModule from "@web3-onboard/gnosis";
 import trustModule from "@web3-onboard/trust";
 import ledgerModule from "@web3-onboard/ledger";
@@ -9,7 +8,7 @@ import injectedModule from "@web3-onboard/injected-wallets";
 
 const injected = injectedModule();
 
-export const onboard = Onboard({
+export const onboardConfig = {
   wallets: [
     injected,
     walletConnectModule({
@@ -34,13 +33,14 @@ export const onboard = Onboard({
       rpcUrl: "https://eth.llamarpc.com",
     },
     {
-      id: "0x11155111",
+      id: "0xaa36a7",
       token: "ETH",
       rpcUrl: "https://sepolia.drpc.org",
     },
     {
-      id: "0x4",
+      id: "0x89",
       token: "ETH",
+      rpcUrl: "https://1rpc.io/matic",
     },
   ],
   appMetadata: {
@@ -48,4 +48,4 @@ export const onboard = Onboard({
     icon: "assets/logo.svg",
     description: "Demonstration of Web3 Onboard integration",
   },
-});
+};
