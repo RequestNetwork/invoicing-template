@@ -20,7 +20,7 @@ export default function Home() {
   }, [wallet, requestNetwork]);
 
   return (
-    <div>
+    <div className="container m-auto  w-[100%]">
       <invoice-dashboard ref={dashboardRef} />
     </div>
   );
