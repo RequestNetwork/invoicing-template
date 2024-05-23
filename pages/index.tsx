@@ -19,8 +19,6 @@ export default function Home() {
         dashboardRef.current.requestNetwork = requestNetwork;
       }
     }
-
-    console.log(wallet);
   }, [wallet, requestNetwork]);
 
   return (

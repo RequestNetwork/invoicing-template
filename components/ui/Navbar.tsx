@@ -50,7 +50,9 @@ const Navbar = () => {
             ? truncateAddress(wallet.accounts[0].address)
             : "Connect Wallet"
         }
-        onClick={connect}
+        onClick={() => {
+          connect();
+        }}
       />
     </nav>
   );

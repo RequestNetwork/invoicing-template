@@ -7,7 +7,6 @@ export const initializeRequestNetwork = async (
 ): Promise<void> => {
   try {
     const web3SignatureProvider = new Web3SignatureProvider(walletClient);
-    console.log("RN", walletClient);
 
     const requestNetwork = new RequestNetwork({
       nodeConnectionConfig: {
@@ -17,7 +16,6 @@ export const initializeRequestNetwork = async (
     });
 
     setter(requestNetwork);
-    console.log("Request Network initialized successfully.");
   } catch (error) {
     console.error("Failed to initialize the Request Network:", error);
     setter(null);

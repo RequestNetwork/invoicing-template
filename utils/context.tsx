@@ -11,6 +11,7 @@ import { initializeRequestNetwork } from "./requestInit";
 
 interface ContextType {
   requestNetwork: RequestNetwork | undefined;
+  wallet: WalletState | undefined;
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
@@ -35,6 +36,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     <Context.Provider
       value={{
         requestNetwork,
+        wallet,
       }}
     >
       {children}
