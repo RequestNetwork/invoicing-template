@@ -45,7 +45,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 export const useAppContext = () => {
   const context = useContext(Context);
   if (!context) {
-    throw new Error("useWallet must be used within a WalletProvider");
+    throw new Error("useAppContext must be used within a Context Provider");
   }
   return context;
 };
