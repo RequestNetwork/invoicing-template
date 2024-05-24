@@ -13,6 +13,4 @@ jobs:
     steps:
       - name: Webhook request
         run: |
-          curl -X GET ${{ secrets.ENDPOINT_URL }}
-        env:
-          ENDPOINT_URL: ${{ secrets.EASYPANEL_STAGING_URL }}
+          curl -X GET ${{ secrets.EASYPANEL_STAGING_URL }}
