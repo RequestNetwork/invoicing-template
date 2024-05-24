@@ -24,5 +24,6 @@ npm run start
 ## Developing
 
 ```
+cp .env.example .env.local
 npm run dev
 ```
