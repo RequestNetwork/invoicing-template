@@ -6,7 +6,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       "invoice-dashboard": InvoiceDashboardElement;
-      "create-request-form": CreateRequestFormElement;
+      "create-invoice-form": CreateInvoiceFormElement;
     }
   }
 }
@@ -15,8 +15,8 @@ interface InvoiceDashboardElement {
   ref?: React.Ref<InvoiceDashboardProps>;
 }
 
-interface CreateRequestFormElement {
-  ref?: React.Ref<CreateRequestFormProps>;
+interface CreateInvoiceFormElement {
+  ref?: React.Ref<CreateInvoiceFormProps>;
 }
 
 interface InvoiceDashboardProps extends HTMLElement {
@@ -25,7 +25,7 @@ interface InvoiceDashboardProps extends HTMLElement {
   requestNetwork: RequestNetwork;
 }
 
-interface CreateRequestFormProps extends HTMLElement {
+interface CreateInvoiceFormProps extends HTMLElement {
   config: IConfig;
   signer: string;
   requestNetwork: RequestNetwork;
