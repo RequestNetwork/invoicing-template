@@ -1,4 +1,5 @@
 import("@requestnetwork/invoice-dashboard");
+import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
@@ -22,8 +23,13 @@ export default function Home() {
   }, [wallet, requestNetwork]);
 
   return (
-    <div className="container m-auto  w-[100%]">
-      <invoice-dashboard ref={dashboardRef} />
-    </div>
+    <>
+      <Head>
+        <title>Request Payment</title>
+      </Head>
+      <div className="container m-auto  w-[100%]">
+        <invoice-dashboard ref={dashboardRef} />
+      </div>
+    </>
   );
 }

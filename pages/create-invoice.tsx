@@ -1,10 +1,11 @@
 import("@requestnetwork/create-invoice-form");
+import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { CreateInvoiceFormProps } from "@/types";
 
-export default function CreateInvoice() {
+export default function Home() {
   const formRef = useRef<CreateInvoiceFormProps>(null);
   const { wallet, requestNetwork } = useAppContext();
 
@@ -20,8 +21,13 @@ export default function CreateInvoice() {
   }, [wallet, requestNetwork]);
 
   return (
-    <div className="container m-auto  w-[100%]">
-      <create-invoice-form ref={formRef} />
-    </div>
+    <>
+      <Head>
+        <title>Request Payment - Create a Request</title>
+      </Head>
+      <div className="container m-auto  w-[100%]">
+        <create-invoice-form ref={formRef} />
+      </div>
+    </>
   );
 }
