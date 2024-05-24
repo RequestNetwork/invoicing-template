@@ -1,2 +1,2 @@
 [phases.setup]
-nixPkgs = ["...", "python3", "python312Packages.pip", "gcc", "make"]
+providers=["...", "python"]
