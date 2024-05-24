@@ -1,0 +1,18 @@
+name: ci
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Webhook request
+        run: |
+          curl -X GET ${{ secrets.ENDPOINT_URL }}
+        env:
+          ENDPOINT_URL: ${{ secrets.EASYPANEL_STAGING_URL }}
