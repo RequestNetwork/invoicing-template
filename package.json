@@ -24,7 +24,6 @@
     "@web3-onboard/trezor": "^2.4.4",
     "@web3-onboard/trust": "^2.0.4",
     "@web3-onboard/walletconnect": "^2.5.5",
-    "ethers": "5.7.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
