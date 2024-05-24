@@ -6,7 +6,7 @@ import { useAppContext } from "@/utils/context";
 import { InvoiceDashboardProps } from "@/types";
 import { useConnectWallet } from "@web3-onboard/react";
 
-export default function Home() {
+export default function InvoiceDashboard() {
   const [{ wallet }] = useConnectWallet();
   const { requestNetwork } = useAppContext();
   const dashboardRef = useRef<InvoiceDashboardProps>(null);
