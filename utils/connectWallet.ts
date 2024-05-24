@@ -44,8 +44,8 @@ export const onboardConfig = {
     },
   ],
   appMetadata: {
-    name: "Request Network Demo",
+    name: "Request Payment",
     icon: "assets/logo.svg",
-    description: "Demonstration of Web3 Onboard integration",
+    description: "Request Network Invoicing Template",
   },
 };
