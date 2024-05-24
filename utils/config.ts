@@ -1,4 +1,6 @@
-export const config = {
+import { IConfig } from "@requestnetwork/shared";
+
+export const config: IConfig = {
   builderId: "request-network",
   dashboardLink: "/",
   logo: "/assets/logo-sm.svg",
