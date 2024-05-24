@@ -12,16 +12,16 @@ export const onboardConfig = {
   wallets: [
     injected,
     walletConnectModule({
-      projectId: "your-project-id",
+      projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
     }),
     coinbaseModule(),
     ledgerModule({
       walletConnectVersion: 2,
-      projectId: "your-project-id",
+      projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
     }),
     trezorModule({
-      email: "test@test.com",
-      appUrl: "https://www.example.com",
+      email: process.env.NEXT_PUBLIC_SUPPORT_EMAIL,
+      appUrl: process.env.NEXT_PUBLIC_APP_URL,
     }),
     safeModule(),
     trustModule(),
@@ -30,17 +30,17 @@ export const onboardConfig = {
     {
       id: "0x1",
       token: "ETH",
-      rpcUrl: "https://eth.llamarpc.com",
+      rpcUrl: process.env.NEXT_PUBLIC_RPC_URL_ETHEREUM || "https://eth.llamarpc.com",
     },
     {
       id: "0xaa36a7",
       token: "ETH",
-      rpcUrl: "https://sepolia.drpc.org",
+      rpcUrl: process.env.NEXT_PUBLIC_RPC_URL_SEPOLIA || "https://sepolia.drpc.org",
     },
     {
       id: "0x89",
       token: "MATIC",
-      rpcUrl: "https://1rpc.io/matic",
+      rpcUrl: process.env.NEXT_PUBLIC_RPC_URL_POLYGON || "https://1rpc.io/matic",
     },
   ],
   appMetadata: {
