@@ -5,38 +5,36 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
+import { WalletState } from "@web3-onboard/core";
 import { useConnectWallet } from "@web3-onboard/react";
-import type { RequestNetwork } from "@requestnetwork/request-client.js";
 import { initializeRequestNetwork } from "./requestInit";
+import type { RequestNetwork } from "@requestnetwork/request-client.js";
 
 interface ContextType {
-  requestNetwork: RequestNetwork | undefined;
-  wallet: WalletState | undefined;
+  wallet: WalletState | null;
+  requestNetwork: RequestNetwork | null;
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const Provider = ({ children }: { children: ReactNode }) => {
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
-  const [requestNetwork, setRequestNetwork] = useState<RequestNetwork>();
-  const [error, setError] = useState<unknown>("");
-
-  const initRequestNetwork = async (provider: any) => {
-    await initializeRequestNetwork(setRequestNetwork, provider);
-  };
+  const [{ wallet }] = useConnectWallet();
+  const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(
+    null
+  );
 
   useEffect(() => {
     if (wallet) {
-      const { accounts, chains, provider } = wallet;
-      initRequestNetwork(provider);
+      const { provider } = wallet;
+      initializeRequestNetwork(setRequestNetwork, provider);
     }
   }, [wallet]);
 
   return (
     <Context.Provider
       value={{
-        requestNetwork,
         wallet,
+        requestNetwork,
       }}
     >
       {children}
