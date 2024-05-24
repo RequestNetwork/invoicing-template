@@ -1,2 +1,6 @@
 [phases.setup]
+<<<<<<< Updated upstream
 providers=["...", "python"]
+=======
+providers = ["...", "python"]
+>>>>>>> Stashed changes
