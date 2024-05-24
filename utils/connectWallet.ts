@@ -17,11 +17,11 @@ export const onboardConfig = {
     coinbaseModule(),
     ledgerModule({
       walletConnectVersion: 2,
-      projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
+      projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID!,
     }),
     trezorModule({
-      email: process.env.NEXT_PUBLIC_SUPPORT_EMAIL,
-      appUrl: process.env.NEXT_PUBLIC_APP_URL,
+      email: process.env.NEXT_PUBLIC_SUPPORT_EMAIL!,
+      appUrl: process.env.NEXT_PUBLIC_APP_URL!,
     }),
     safeModule(),
     trustModule(),
