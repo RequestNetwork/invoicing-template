@@ -3,9 +3,7 @@ name: ci
 on:
   workflow_dispatch:
   push:
-    branches: [main]
-  pull_request:
-    types: [opened, edited]
+    branches: [staging]
 
 jobs:
   deploy:
