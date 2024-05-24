@@ -5,7 +5,7 @@ import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { CreateInvoiceFormProps } from "@/types";
 
-export default function Home() {
+export default function CreateInvoice() {
   const formRef = useRef<CreateInvoiceFormProps>(null);
   const { wallet, requestNetwork } = useAppContext();
 
@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Request Payment - Create a Request</title>
+        <title>Request Payment - Create an Invoice</title>
       </Head>
       <div className="container m-auto  w-[100%]">
         <create-invoice-form ref={formRef} />
