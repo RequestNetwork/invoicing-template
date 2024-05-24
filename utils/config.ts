@@ -1,7 +1,7 @@
 import { IConfig } from "@requestnetwork/shared";
 
 export const config: IConfig = {
-  builderId: "request-network",
+  builderId: "request-network", // Replace with your builder ID, arbitrarily chosen, used to identify your app
   dashboardLink: "/",
   logo: "/assets/logo-sm.svg",
   colors: {
