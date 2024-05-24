@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: Webhook request
         run: |
-          curl -X GET https://invoicing.request.network/api/deploy/${{ secrets.EASYPANEL_DEPLOY_KEY_STAGING }}
+          curl -X GET https://stage.request.network/api/deploy/${{ secrets.INVOICING_DEPLOY_KEY_EASYPANEL_STAGING }}
