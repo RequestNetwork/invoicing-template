@@ -8,17 +8,22 @@ import { onboardConfig } from "../utils/connectWallet";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-const wen3Onboard = init(onboardConfig);
+const wen3Onboard = init({
+	connect: {
+		autoConnectAllPreviousWallet: true,
+	},
+	...onboardConfig,
+});
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <div className={`${montserrat.className}`}>
-      <Web3OnboardProvider web3Onboard={wen3Onboard}>
-        <Provider>
-          <Navbar />
-          <Component {...pageProps} />
-        </Provider>
-      </Web3OnboardProvider>
-    </div>
-  );
+	return (
+		<div className={`${montserrat.className}`}>
+			<Web3OnboardProvider web3Onboard={wen3Onboard}>
+				<Provider>
+					<Navbar />
+					<Component {...pageProps} />
+				</Provider>
+			</Web3OnboardProvider>
+		</div>
+	);
 }
