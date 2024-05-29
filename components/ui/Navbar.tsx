@@ -16,7 +16,7 @@ const Navbar = () => {
       href: "/",
     },
     {
-      name: "Create a Request",
+      name: "Create a Invoice",
       href: "/create-invoice",
     },
   ];
