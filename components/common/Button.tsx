@@ -4,7 +4,7 @@ interface ButtonProps {
   text: string;
   color?: string;
   padding?: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   className?: string;
   icon?: {
