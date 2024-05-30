@@ -6,6 +6,7 @@ import { useConnectWallet } from "@web3-onboard/react";
 import Button from "../common/Button";
 import { ArrowUpRight } from "@/icons";
 import { truncateAddress } from "@/utils/walletUtils";
+import Dropdown from "../common/Dropdown";
 
 const Navbar = () => {
   const router = useRouter();
@@ -20,6 +21,17 @@ const Navbar = () => {
     {
       name: "Create an Invoice",
       href: "/create-invoice",
+    },
+  ];
+
+  const supportLinks = [
+    {
+      name: "Discord",
+      href: "https://discord.com/channels/468974345222619136/1245696141010669619",
+    },
+    {
+      name: "Github Discussions",
+      href: "https://github.com/orgs/RequestNetwork/discussions",
     },
   ];
 
@@ -65,6 +77,7 @@ const Navbar = () => {
             } w-100 bg-[#0BB489]`}
           ></div>
         </div>
+        <Dropdown title="Need help?" items={supportLinks} />
         <Button
           text={
             wallet
