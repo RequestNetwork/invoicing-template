@@ -3,10 +3,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useConnectWallet } from "@web3-onboard/react";
-import Button from "../common/Button";
 import { ArrowUpRight } from "@/icons";
+import { Button, Dropdown } from "../common";
 import { truncateAddress } from "@/utils/walletUtils";
-import Dropdown from "../common/Dropdown";
 
 const Navbar = () => {
   const router = useRouter();

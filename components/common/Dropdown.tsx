@@ -18,7 +18,7 @@ const Dropdown = ({ outlined = true, title, items }: DropdownProps) => {
       <button
         id="dropdownDividerButton"
         onClick={() => setIsOpen(!isOpen)}
-        className={`text-white ${
+        className={`${
           !outlined
             ? "bg-green hover:bg-dark-green"
             : "bg-transparent text-dark-green border-dark-green border-[1px] hover:border-green hover:text-green"
