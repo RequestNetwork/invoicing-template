@@ -1,15 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import Button from "../common/Button";
-import { useAppContext } from "@/utils/context";
-import { truncateAddress } from "@/utils/walletUtils";
+import React, { useState } from "react";
 import { useConnectWallet } from "@web3-onboard/react";
+import Button from "../common/Button";
+import { ArrowUpRight } from "@/icons";
+import { truncateAddress } from "@/utils/walletUtils";
+import Dropdown from "../common/Dropdown";
 
 const Navbar = () => {
-  const [{ wallet }, connect] = useConnectWallet();
   const router = useRouter();
+  const [{ wallet }, connect] = useConnectWallet();
+  const [isDocsHovered, setIsDocsHovered] = useState(false);
+
   const links = [
     {
       name: "My dashboard",
@@ -18,6 +21,17 @@ const Navbar = () => {
     {
       name: "Create an Invoice",
       href: "/create-invoice",
+    },
+  ];
+
+  const supportLinks = [
+    {
+      name: "Discord",
+      href: "https://discord.com/channels/468974345222619136/1103420140181274645",
+    },
+    {
+      name: "Github Discussions",
+      href: "https://github.com/orgs/RequestNetwork/discussions",
     },
   ];
 
@@ -37,23 +51,44 @@ const Navbar = () => {
             <div
               className={`${
                 router.pathname === link.href &&
-                "h-[4px] bg-light-green w-full absolute bottom-[-28px]"
+                "h-[4px] bg-[#0BB489] w-full absolute bottom-[-28px]"
               }`}
             ></div>
           </li>
         ))}
       </ul>
-      <Button
-        className="ml-auto"
-        text={
-          wallet
-            ? truncateAddress(wallet.accounts[0].address)
-            : "Connect Wallet"
-        }
-        onClick={() => {
-          connect();
-        }}
-      />
+      <div className="flex items-center gap-[35px] ml-auto">
+        <div
+          onMouseEnter={() => setIsDocsHovered(true)}
+          onMouseLeave={() => setIsDocsHovered(false)}
+        >
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://docs.request.network/building-blocks/templates"
+            className="flex items-center gap-[5px] bg-transparent text-[#0BB489] font-medium text-[16px]"
+          >
+            Integrate in your app
+            <ArrowUpRight />
+          </a>
+          <div
+            className={`${
+              isDocsHovered ? "h-[2px]" : "h-[0px]"
+            } w-100 bg-[#0BB489]`}
+          ></div>
+        </div>
+        <Dropdown title="Need help?" items={supportLinks} />
+        <Button
+          text={
+            wallet
+              ? truncateAddress(wallet.accounts[0].address)
+              : "Connect Wallet"
+          }
+          onClick={() => {
+            connect();
+          }}
+        />
+      </div>
     </nav>
   );
 };
