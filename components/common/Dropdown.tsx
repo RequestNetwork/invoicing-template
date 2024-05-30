@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ArrowUpRight } from "@/icons";
 
 interface DropdownProps {
   title: string;
@@ -6,9 +7,10 @@ interface DropdownProps {
     name: string;
     href: string;
   }[];
+  outlined?: boolean;
 }
 
-const Dropdown = ({ title, items }: DropdownProps) => {
+const Dropdown = ({ outlined = true, title, items }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,7 +18,11 @@ const Dropdown = ({ title, items }: DropdownProps) => {
       <button
         id="dropdownDividerButton"
         onClick={() => setIsOpen(!isOpen)}
-        className="text-white bg-[#0BB489] hover:bg-dark-green focus:ring-transparent focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-[28px] py-[8px] text-center inline-flex items-center "
+        className={`text-white ${
+          !outlined
+            ? "bg-green hover:bg-dark-green"
+            : "bg-transparent text-dark-green border-dark-green border-[1px] hover:border-green hover:text-green"
+        }   focus:ring-transparent focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-[28px] py-[8px] text-center inline-flex items-center`}
         type="button"
       >
         {title}
@@ -41,7 +47,7 @@ const Dropdown = ({ title, items }: DropdownProps) => {
         <div
           id="dropdownDivider"
           style={{ left: "50%", transform: "translateX(-50%)" }}
-          className="z-10 w-100 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute mt-2"
+          className="z-10 w-[190px] bg-white divide-y divide-gray-100 rounded-lg shadow  absolute mt-2"
         >
           <ul
             className="py-2 text-sm text-gray-700 "
@@ -53,9 +59,10 @@ const Dropdown = ({ title, items }: DropdownProps) => {
                   target="_blank"
                   href={item.href}
                   rel="noreferrer noopener"
-                  className="block px-4 py-2 hover:bg-gray-100 "
+                  className="px-3 py-2 hover:bg-gray-100 flex items-center gap-2"
                 >
                   {item.name}
+                  <ArrowUpRight />
                 </a>
               </li>
             ))}
