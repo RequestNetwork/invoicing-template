@@ -27,7 +27,7 @@ const Navbar = () => {
   const supportLinks = [
     {
       name: "Discord",
-      href: "https://discord.com/channels/468974345222619136/1245696141010669619",
+      href: "https://discord.com/channels/468974345222619136/1103420140181274645",
     },
     {
       name: "Github Discussions",
