@@ -10,6 +10,9 @@ export const initializeRequestNetwork = (setter: any, walletClient: any) => {
         baseURL: "https://gnosis.gateway.request.network/",
       },
       signatureProvider: web3SignatureProvider,
+      httpConfig: {
+        getConfirmationMaxRetry: 120,
+      },
     });
 
     setter(requestNetwork);
