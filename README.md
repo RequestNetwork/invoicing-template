@@ -31,8 +31,10 @@ npm run dev
 
 ## Deploy
 
-- [ci.yml](/.github/workflows/ci.yml) - Deploy to Staging on push to `main` branch.
-- [cd.yml](/.github/workflows/cd.yml) - Deploy to Production on release published in Github.
+We deploy to an [EasyPanel](https://easypanel.io/) server using Github Actions and [Heroku Buildpacks](https://devcenter.heroku.com/articles/buildpacks). You could easily deploy to Vercel, Netlify, or any other platform.
+
+- [deploy-to-staging.yml](/.github/workflows/deploy-to-staging.yml) - Deploy to Staging on push to `main` branch.
+- [deploy-to-production.yml](/.github/workflows/deploy-to-production.yml) - Deploy to Production on release published in Github.
 
 ## Configuration
 
