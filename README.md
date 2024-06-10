@@ -36,6 +36,19 @@ We deploy to an [EasyPanel](https://easypanel.io/) server using Github Actions a
 - [deploy-to-staging.yml](/.github/workflows/deploy-to-staging.yml) - Deploy to Staging on push to `main` branch.
 - [deploy-to-production.yml](/.github/workflows/deploy-to-production.yml) - Deploy to Production on release published in Github.
 
+## Environment Variables
+
+Before deploying, ensure you have created a `.env` file in the root of your project. Below is a list of available environment variables. You can also take a look at the [.env.example](./.env.example) file for reference.
+
+| Variable Name                         | Description                    | Required |
+| ------------------------------------- | ------------------------------ | -------- |
+| NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID | Your Wallet Connect Project ID | ✅       |
+| NEXT_PUBLIC_SUPPORT_EMAIL             | Support email address          | ✅       |
+| NEXT_PUBLIC_APP_URL                   | The application URL            | ✅       |
+| NEXT_PUBLIC_RPC_URL_ETHEREUM          | RPC URL for Ethereum network   | ✅       |
+| NEXT_PUBLIC_RPC_URL_POLYGON           | RPC URL for Polygon network    | ✅       |
+| NEXT_PUBLIC_RPC_URL_SEPOLIA           | RPC URL for Sepolia network    | ✅       |
+
 ## Configuration
 
 In your next.config.js file, ensure you have the following configuration:
