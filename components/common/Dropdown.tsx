@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight } from "@/icons";
 
 interface DropdownProps {
@@ -12,9 +12,26 @@ interface DropdownProps {
 
 const Dropdown = ({ outlined = true, title, items }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         id="dropdownDividerButton"
         onClick={() => setIsOpen(!isOpen)}
@@ -47,7 +64,7 @@ const Dropdown = ({ outlined = true, title, items }: DropdownProps) => {
         <div
           id="dropdownDivider"
           style={{ left: "50%", transform: "translateX(-50%)" }}
-          className="z-10 w-[190px] bg-white divide-y divide-gray-100 rounded-lg shadow  absolute mt-2"
+          className="z-10 w-[190px] bg-white divide-y divide-gray-100 rounded-lg shadow absolute mt-2"
         >
           <ul
             className="py-2 text-sm text-gray-700 "
