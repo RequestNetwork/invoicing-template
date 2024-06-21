@@ -42,7 +42,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="relative h-full flex items-center p-[20px] gap-[20px] xl:gap-[60px] bg-white shadow-small mb-[80px]">
+    <nav className="relative h-full flex items-center p-[20px] gap-[20px] xl:gap-[60px] bg-white shadow-small mb-[30px] tablet:mb-[80px]">
       <a
         target="_blank"
         rel="noreferrer noopener"
@@ -115,7 +115,10 @@ const Navbar = () => {
             {links.map((link, index) => (
               <li key={index}>
                 <Link
-                  className="w-[100%] block h-[30px]"
+                  className={`w-[80%] block h-[30px] ${
+                    router.pathname === link.href &&
+                    "border-b-[1px] border-solid border-green"
+                  }`}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -139,7 +142,7 @@ const Navbar = () => {
             </li>
             <li>
               <Button
-                className="w-[122px] justify-center px-[14px] text-[16px] py-[8px]"
+                className="w-[122px] justify-center text-[16px]  py-[8px]"
                 text={
                   wallet
                     ? truncateAddress(wallet.accounts[0].address)

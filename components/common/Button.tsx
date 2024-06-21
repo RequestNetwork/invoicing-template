@@ -27,7 +27,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`flex items-center gap-[10px] disabled:cursor-not-allowed disabled:bg-grey disabled:text-dark-grey text-white rounded-[8px] hover:bg-dark-green transition-all text-[14px] px-[28px] py-[8px]" ${className} ${color}`}
+      className={`flex items-center gap-[10px] disabled:cursor-not-allowed disabled:bg-grey disabled:text-dark-grey text-white rounded-[8px] hover:bg-dark-green transition-all text-[14px] px-[10px] tablet:px-[28px] py-[8px]" ${className} ${color}`}
     >
       {icon && <i className={icon.class} style={icon.style}></i>}
       {text}
