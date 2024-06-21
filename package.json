@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.0",
     "@requestnetwork/create-invoice-form": "^0.5.0",
     "@requestnetwork/invoice-dashboard": "^0.4.0",
     "@requestnetwork/request-client.js": "0.45.0",
@@ -23,9 +24,14 @@
     "@web3-onboard/trezor": "^2.4.4",
     "@web3-onboard/trust": "^2.0.4",
     "@web3-onboard/walletconnect": "^2.5.5",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.395.0",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
     "viem": "^2.9.15"
   },
   "devDependencies": {

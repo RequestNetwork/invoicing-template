@@ -39,12 +39,12 @@ const Dropdown = ({ outlined = true, title, items }: DropdownProps) => {
           !outlined
             ? "bg-green hover:bg-dark-green"
             : "bg-transparent text-dark-green border-dark-green border-[1px] hover:border-green hover:text-green"
-        }   focus:ring-transparent focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-[28px] py-[8px] text-center inline-flex items-center`}
+        }   focus:ring-transparent focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[14px] lg:text-sm px-[12px] lg:px-[28px] py-[8px] text-center inline-flex items-center`}
         type="button"
       >
         {title}
         <svg
-          className="w-2.5 h-2.5 ms-3"
+          className="w-2.5 h-2.5 ms-3 "
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -63,8 +63,8 @@ const Dropdown = ({ outlined = true, title, items }: DropdownProps) => {
       {isOpen && (
         <div
           id="dropdownDivider"
-          style={{ left: "50%", transform: "translateX(-50%)" }}
-          className="z-10 w-[190px] bg-white divide-y divide-gray-100 rounded-lg shadow absolute mt-2"
+          style={{ transform: "translateX(-50%)" }}
+          className="z-10 w-[190px] bg-white divide-y divide-gray-100 rounded-lg shadow absolute mt-2 left-[70%] tablet:left-[50%]"
         >
           <ul
             className="py-2 text-sm text-gray-700 "
