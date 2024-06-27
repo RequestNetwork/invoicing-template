@@ -16,7 +16,10 @@ export const initializeRequestNetwork = (setter: any, walletClient: any) => {
       },
       paymentOptions: {
         getSubgraphClient: (chain: string) => {
-          const paymentsSubgraphUrl = process.env[`NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_${chain.toUpperCase()}`]!;
+          const envVarName = `NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_${chain.toUpperCase()}`;
+          console.log(`Accessing environment variable: ${envVarName}`);
+          const paymentsSubgraphUrl = process.env[envVarName]!;
+          console.log(`Value: ${paymentsSubgraphUrl}`);
           return getTheGraphClient(chain, paymentsSubgraphUrl);
         }
       }
