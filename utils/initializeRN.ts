@@ -58,7 +58,7 @@ export const initializeRequestNetwork = (setter: any, walletClient: any) => {
               ? process.env.NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_ZKSYNCERA
               : undefined;
           if (!paymentsSubgraphUrl) {
-            throw new Error(`Unknown chain: ${chain}`);
+            throw new Error(`Cannot get subgraph client for unknown chain: ${chain}`);
           }
           return getTheGraphClient(chain, paymentsSubgraphUrl);
         },
