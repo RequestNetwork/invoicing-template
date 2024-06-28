@@ -23,10 +23,12 @@ interface InvoiceDashboardProps extends HTMLElement {
   config: IConfig;
   wallet: WalletState;
   requestNetwork: RequestNetwork;
+  currencies: any;
 }
 
 interface CreateInvoiceFormProps extends HTMLElement {
   config: IConfig;
   signer: string;
   requestNetwork: RequestNetwork;
+  currencies: any;
 }
