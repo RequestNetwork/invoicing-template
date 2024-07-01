@@ -1,4 +1,4 @@
-# Request Payment (Invoicing Template)
+# Request Invoicing (Invoicing Template)
 
 A simple invoicing template for creating, paying, and viewing requests in Request Network.
 
