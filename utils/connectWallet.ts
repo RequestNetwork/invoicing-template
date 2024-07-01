@@ -48,7 +48,7 @@ export const onboardConfig = {
     },
   ],
   appMetadata: {
-    name: "Request Payment",
+    name: "Request Invoicing",
     icon: "assets/logo.svg",
     description: "Request Network Invoicing Template",
   },

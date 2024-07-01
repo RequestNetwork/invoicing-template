@@ -25,7 +25,7 @@ export default function CreateInvoice() {
   return (
     <>
       <Head>
-        <title>Request Payment - Create an Invoice</title>
+        <title>Request Invoicing - Create an Invoice</title>
       </Head>
       <div className="container m-auto  w-[100%]">
         <create-invoice-form ref={formRef} />
