@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { CreateInvoiceFormProps } from "@/types";
+import { currencies } from "@/utils/currencies";
 
 export default function CreateInvoice() {
   const formRef = useRef<CreateInvoiceFormProps>(null);
@@ -16,6 +17,7 @@ export default function CreateInvoice() {
       if (wallet && requestNetwork) {
         formRef.current.signer = wallet.accounts[0].address;
         formRef.current.requestNetwork = requestNetwork;
+        formRef.current.currencies = currencies;
       }
     }
   }, [wallet, requestNetwork]);

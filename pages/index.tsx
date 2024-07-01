@@ -5,6 +5,7 @@ import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { InvoiceDashboardProps } from "@/types";
 import { useConnectWallet } from "@web3-onboard/react";
+import { currencies } from "@/utils/currencies";
 
 export default function InvoiceDashboard() {
   const [{ wallet }] = useConnectWallet();
@@ -18,6 +19,7 @@ export default function InvoiceDashboard() {
       if (wallet && requestNetwork) {
         dashboardRef.current.wallet = wallet;
         dashboardRef.current.requestNetwork = requestNetwork;
+        dashboardRef.current.currencies = currencies;
       }
     }
   }, [wallet, requestNetwork]);
