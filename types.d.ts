@@ -1,4 +1,4 @@
-import { IConfig } from "@requestnetwork/shared";
+import { IConfig } from "@/utils/types";
 import { WalletState } from "@web3-onboard/core";
 import type { RequestNetwork } from "@requestnetwork/request-client.js";
 
