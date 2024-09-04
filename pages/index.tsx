@@ -1,28 +1,13 @@
-import("@requestnetwork/invoice-dashboard");
-import Head from "next/head";
-import { useEffect, useRef } from "react";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
-import { InvoiceDashboardProps } from "@/types";
-import { useConnectWallet } from "@web3-onboard/react";
 import { currencies } from "@/utils/currencies";
+import InvoiceDashboard from "@requestnetwork/invoice-dashboard/react";
+import { useConnectWallet } from "@web3-onboard/react";
+import Head from "next/head";
 
-export default function InvoiceDashboard() {
+export default function InvoiceDashboardPage() {
   const [{ wallet }] = useConnectWallet();
   const { requestNetwork } = useAppContext();
-  const dashboardRef = useRef<InvoiceDashboardProps>(null);
-
-  useEffect(() => {
-    if (dashboardRef.current) {
-      dashboardRef.current.config = config;
-
-      if (wallet && requestNetwork) {
-        dashboardRef.current.wallet = wallet;
-        dashboardRef.current.requestNetwork = requestNetwork;
-        dashboardRef.current.currencies = currencies;
-      }
-    }
-  }, [wallet, requestNetwork]);
 
   return (
     <>
@@ -30,7 +15,12 @@ export default function InvoiceDashboard() {
         <title>Request Invoicing</title>
       </Head>
       <div className="container m-auto  w-[100%]">
-        <invoice-dashboard ref={dashboardRef} />
+        <InvoiceDashboard
+          config={config}
+          currencies={currencies}
+          requestNetwork={requestNetwork}
+          wallet={wallet}
+        />
       </div>
     </>
   );
