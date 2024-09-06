@@ -40,35 +40,44 @@ We deploy to an [EasyPanel](https://easypanel.io/) server using Github Actions a
 
 Before deploying, ensure you have created a `.env` or `.env.local` file in the root of your project. Below is a list of available environment variables. You can also take a look at the [.env.example](./.env.example) file for reference.
 
-> **:warning: WARNING:** The default `PAYMENTS_SUBGRAPH_URL`s are rate-limited and should be replaced with your own subgraph URLs.
+> **:warning: WARNING:** The default `PAYMENTS_SUBGRAPH_URL`s are rate-limited and can be replaced with your own subgraph URLs.
 
 | Variable Name                                  | Description                          | Required |
 | ---------------------------------------------- | ------------------------------------ | -------- |
 | NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID          | Your Wallet Connect Project ID       | ✅       |
 | NEXT_PUBLIC_SUPPORT_EMAIL                      | Support email address                | ✅       |
 | NEXT_PUBLIC_APP_URL                            | The application URL                  | ✅       |
-| NEXT_PUBLIC_RPC_URL_ETHEREUM                   | RPC URL for Ethereum                 | ✅       |
-| NEXT_PUBLIC_RPC_URL_POLYGON                    | RPC URL for Polygon                  | ✅       |
-| NEXT_PUBLIC_RPC_URL_SEPOLIA                    | RPC URL for Sepolia                  | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_ARBITRUM_ONE | Subgraph URL for Arbitrum One        | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_AVALANCHE    | Subgraph URL for Avalanche           | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_BASE         | Subgraph URL for Base                | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_BSC          | Subgraph URL for Binance Smart Chain | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_CELO         | Subgraph URL for Celo                | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_CORE         | Subgraph URL for Core                | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_FANTOM       | Subgraph URL for Fantom              | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_FUSE         | Subgraph URL for Fuse                | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_MAINNET      | Subgraph URL for Mainnet             | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_MATIC        | Subgraph URL for Matic               | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_MOONBEAM     | Subgraph URL for Moonbeam            | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_NEAR         | Subgraph URL for Near                | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_NEAR_TESTNET | Subgraph URL for Near Testnet        | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_OPTIMISM     | Subgraph URL for Optimism            | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_RONIN        | Subgraph URL for Ronin               | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_SEPOLIA      | Subgraph URL for Sepolia             | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_TOMBCHAIN    | Subgraph URL for Tombchain           | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_XDAI         | Subgraph URL for xDai                | ✅       |
-| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_ZKSYNCERA    | Subgraph URL for ZkSyncEra           | ✅       |
+| NEXT_PUBLIC_RPC_URL_ARBITRUM_ONE               | RPC URL for Arbitrum One             | ❌       |
+| NEXT_PUBLIC_RPC_URL_AVALANCHE                  | RPC URL for Avalanche                | ❌       |
+| NEXT_PUBLIC_RPC_URL_BASE                       | RPC URL for Base                     | ❌       |
+| NEXT_PUBLIC_RPC_URL_BSC                        | RPC URL for Binance Smart Chain      | ❌       |
+| NEXT_PUBLIC_RPC_URL_CELO                       | RPC URL for Celo                     | ❌       |
+| NEXT_PUBLIC_RPC_URL_CORE                       | RPC URL for Core                     | ❌       |
+| NEXT_PUBLIC_RPC_URL_FANTOM                     | RPC URL for Fantom                   | ❌       |
+| NEXT_PUBLIC_RPC_URL_FUSE                       | RPC URL for Fuse                     | ❌       |
+| NEXT_PUBLIC_RPC_URL_ETHEREUM                   | RPC URL for Ethereum                 | ❌       |
+| NEXT_PUBLIC_RPC_URL_POLYGON                    | RPC URL for Polygon                  | ❌       |
+| NEXT_PUBLIC_RPC_URL_MOONBEAM                   | RPC URL for Moonbeam                 | ❌       |
+| NEXT_PUBLIC_RPC_URL_OPTIMISM                   | RPC URL for Optimism                 | ❌       |
+| NEXT_PUBLIC_RPC_URL_SEPOLIA                    | RPC URL for Sepolia                  | ❌       |
+| NEXT_PUBLIC_RPC_URL_XDAI                       | RPC URL for Gnosis                   | ❌       |
+| NEXT_PUBLIC_RPC_URL_ZKSYNCERA                  | RPC URL for ZkSyncEra                | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_ARBITRUM_ONE | Subgraph URL for Arbitrum One        | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_AVALANCHE    | Subgraph URL for Avalanche           | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_BASE         | Subgraph URL for Base                | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_BSC          | Subgraph URL for Binance Smart Chain | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_CELO         | Subgraph URL for Celo                | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_CORE         | Subgraph URL for Core                | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_FANTOM       | Subgraph URL for Fantom              | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_FUSE         | Subgraph URL for Fuse                | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_MAINNET      | Subgraph URL for Mainnet             | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_MATIC        | Subgraph URL for Matic               | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_MOONBEAM     | Subgraph URL for Moonbeam            | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_OPTIMISM     | Subgraph URL for Optimism            | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_SEPOLIA      | Subgraph URL for Sepolia             | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_XDAI         | Subgraph URL for Gnosis              | ❌       |
+| NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_ZKSYNCERA    | Subgraph URL for ZkSyncEra           | ❌       |
+| NEXT_PUBLIC_GTM_ID                             | Google Tag Manager ID                | ❌       |
 
 ## Configuration
 
