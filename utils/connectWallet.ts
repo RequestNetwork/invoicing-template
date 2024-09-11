@@ -29,10 +29,76 @@ export const onboardConfig = {
   ],
   chains: [
     {
+      id: "0xa4b1",
+      token: "ETH",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_ARBITRUM_ONE || "https://arbitrum.llamarpc.com",
+    },
+    {
+      id: "0xa86a",
+      token: "AVAX",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_AVALANCHE || "https://avalanche.drpc.org",
+    },
+    {
+      id: "0x0x2105",
+      token: "ETH",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_BASE || "https://base.llamarpc.com"
+    },
+    {
+      id: "0x38",
+      token: "BNB",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_BSC || "https://bsc.llamarpc.com",
+    },
+    {
+      id: "0xa4ec",
+      token: "CELO",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_CELO || "https://forno.celo.org",
+    },
+    {
+      id: "0x45c",
+      token: "CORE",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_CORE || "https://rpc.coredao.org",
+    },
+    {
+      id: "0xfa",
+      token: "FTM",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_FANTOM || "https://endpoints.omniatech.io/v1/fantom/mainnet/public",
+    },
+    {
+      id: "0x7a",
+      token: "FUSE",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_FUSE || "https://fuse.drpc.org",
+    },
+    {
       id: "0x1",
       token: "ETH",
       rpcUrl:
         process.env.NEXT_PUBLIC_RPC_URL_ETHEREUM || "https://eth.llamarpc.com",
+    },
+    {
+      id: "0x89",
+      token: "MATIC",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_POLYGON || "https://1rpc.io/matic",
+    },
+    {
+      id: "0x504",
+      token: "GLMR",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_MOONBEAM || "https://moonbeam-rpc.publicnode.com",
+    },
+    {
+      id: "0xa",
+      token: "ETH",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_OPTIMISM || "https://optimism.llamarpc.com",
     },
     {
       id: "0xaa36a7",
@@ -41,11 +107,17 @@ export const onboardConfig = {
         process.env.NEXT_PUBLIC_RPC_URL_SEPOLIA || "https://sepolia.drpc.org",
     },
     {
-      id: "0x89",
-      token: "MATIC",
+      id: "0x64",
+      token: "XDAI",
       rpcUrl:
-        process.env.NEXT_PUBLIC_RPC_URL_POLYGON || "https://1rpc.io/matic",
+        process.env.NEXT_PUBLIC_RPC_URL_XDAI || "https://gnosis.drpc.org",
     },
+    {
+      id: "0x144",
+      token: "ETH",
+      rpcUrl:
+        process.env.NEXT_PUBLIC_RPC_URL_ZKSYNCERA || "https://mainnet.era.zksync.io",
+    }
   ],
   appMetadata: {
     name: "Request Invoicing",
