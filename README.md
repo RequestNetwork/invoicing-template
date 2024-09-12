@@ -1,3 +1,5 @@
+<!-- @format -->
+
 # Request Invoicing (Invoicing Template)
 
 A simple invoicing template for creating, paying, and viewing requests in Request Network.
@@ -30,6 +32,10 @@ npm run dev
 ```
 
 ## Deploy
+
+Deploy with Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRequestNetwork%2Finvoicing-template&env=NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,NEXT_PUBLIC_SUPPORT_EMAIL,NEXT_PUBLIC_APP_URL&envDescription=Before%20deploying%2C%20ensure%20you%20have%20created%20a%20.env%20or%20.env.local%20file%20in%20the%20root%20of%20your%20project.%20Below%20is%20a%20list%20of%20available%20environment%20variables.%20You%20can%20also%20take%20a%20look%20at%20the%20.env.example%20file%20for%20reference.&envLink=https%3A%2F%2Fgithub.com%2FRequestNetwork%2Finvoicing-template%3Ftab%3Dreadme-ov-file%23environment-variables&project-name=invoicing-template&repository-name=invoicing-template&demo-title=Request%20Invoicing&demo-description=Request%20Invoicing&demo-url=https%3A%2F%2Finvoicing.request.network%2F&demo-image=https%3A%2F%2Finvoicing.request.network%2Fassets%2Flogo.svg)
 
 We deploy to an [EasyPanel](https://easypanel.io/) server using Github Actions and [Heroku Buildpacks](https://devcenter.heroku.com/articles/buildpacks). You could easily deploy to Vercel, Netlify, or any other platform.
 
