@@ -8,6 +8,7 @@ const config = {
     "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
+  darkMode: "selector",
   theme: {
     screens: {
       sm: "640px",
