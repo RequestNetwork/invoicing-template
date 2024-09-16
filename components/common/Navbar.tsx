@@ -17,6 +17,7 @@ const Navbar = () => {
   const router = useRouter();
   const [{ wallet }, connect] = useConnectWallet();
   const [isDocsHovered, setIsDocsHovered] = useState(false);
+  const [isScheduleHovered, setIsScheduleHovered] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const links = [
@@ -74,6 +75,25 @@ const Navbar = () => {
       </ul>
       <div className="hidden tablet:flex items-center gap-[15px] lg:gap-[35px] ml-auto ">
         <div
+          onMouseEnter={() => setIsScheduleHovered(true)}
+          onMouseLeave={() => setIsScheduleHovered(false)}
+        >
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://calendly.com/d/cj8v-459-qfv/rn-interview"
+            className="flex items-center gap-[5px] bg-transparent text-green font-medium text-[14px] lg:text-[16px]"
+          >
+            Book a demo
+            <ArrowUpRight />
+          </a>
+          <div
+            className={`${
+              isScheduleHovered ? "h-[1.5px]" : "h-[0px]"
+            } w-100 bg-green`}
+          ></div>
+        </div>
+        <div
           onMouseEnter={() => setIsDocsHovered(true)}
           onMouseLeave={() => setIsDocsHovered(false)}
         >
@@ -126,7 +146,16 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
-            <li>
+            <li className="flex flex-col gap-7">
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://docs.request.network/building-blocks/templates"
+                className="flex items-center gap-[5px] bg-transparent text-green font-medium text-[16px] w-[100%] h-[30px]"
+              >
+                Book a demo
+                <ArrowUpRight />
+              </a>
               <a
                 target="_blank"
                 rel="noreferrer noopener"
