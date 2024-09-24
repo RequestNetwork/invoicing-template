@@ -81,7 +81,7 @@ const Navbar = () => {
           <a
             target="_blank"
             rel="noreferrer noopener"
-            href="https://calendly.com/d/cj8v-459-qfv/rn-interview"
+            href={process.env.NEXT_PUBLIC_DEMO_URL}
             className="flex items-center gap-[5px] bg-transparent text-green font-medium text-[14px] lg:text-[16px]"
           >
             Book a demo
