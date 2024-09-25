@@ -13,9 +13,11 @@
     "@radix-ui/react-dialog": "^1.1.0",
     "@requestnetwork/create-invoice-form": "^0.8.1",
     "@requestnetwork/invoice-dashboard": "^0.7.1",
+    "@rainbow-me/rainbowkit": "^2.1.6",
     "@requestnetwork/payment-detection": "0.43.1-next.2043",
     "@requestnetwork/request-client.js": "0.47.1-next.2043",
     "@requestnetwork/web3-signature": "0.6.1-next.2043",
+    "@wagmi/core": "^2.13.5",
     "@web3-onboard/coinbase": "^2.2.7",
     "@web3-onboard/core": "^2.21.6",
     "@web3-onboard/gnosis": "^2.2.2",
@@ -33,7 +35,8 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "viem": "^2.9.15"
+    "viem": "^2.9.15",
+    "wagmi": "^2.12.12"
   },
   "devDependencies": {
     "@types/node": "^20",
