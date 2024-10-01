@@ -5,40 +5,35 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
+import { WalletState } from "@web3-onboard/core";
+import { useConnectWallet } from "@web3-onboard/react";
 import { initializeRequestNetwork } from "./initializeRN";
 import type { RequestNetwork } from "@requestnetwork/request-client.js";
 
-// Import RainbowKit hooks
-import { useAccount, useConnect, useDisconnect, usePublicClient } from "wagmi";
-
 interface ContextType {
-  rainbowKitWallet: string | null;
+  wallet: WalletState | null;
   requestNetwork: RequestNetwork | null;
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const Provider = ({ children }: { children: ReactNode }) => {
-  const { address: rainbowKitAddress } = useAccount(); // Get connected wallet address
-  const rainbowKitProvider = usePublicClient(); // Get the public provider (RainbowKit provider)
-  const { disconnect } = useDisconnect(); // Handle disconnect logic
+  const [{ wallet }] = useConnectWallet();
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(
     null
   );
 
-  const rainbowKitWallet = rainbowKitAddress || null;
-
   useEffect(() => {
-    // Initialize Request Network if RainbowKit wallet is connected
-    if (rainbowKitWallet && rainbowKitProvider) {
-      initializeRequestNetwork(setRequestNetwork, rainbowKitProvider);
+    if (wallet) {
+      const { provider } = wallet;
+      initializeRequestNetwork(setRequestNetwork, provider);
     }
-  }, [rainbowKitWallet, rainbowKitProvider]);
+  }, [wallet]);
 
   return (
     <Context.Provider
       value={{
-        rainbowKitWallet,
+        wallet,
         requestNetwork,
       }}
     >

@@ -26,6 +26,7 @@
     "@web3-onboard/react": "^2.9.3",
     "@web3-onboard/trezor": "^2.4.4",
     "@web3-onboard/trust": "^2.0.4",
+    "@web3-onboard/wagmi": "^2.0.1",
     "@web3-onboard/walletconnect": "^2.5.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
