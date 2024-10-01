@@ -2,14 +2,18 @@ import Navbar from "@/components/common/Navbar";
 import "@/styles/globals.css";
 import { Provider } from "@/utils/context";
 import { GoogleTagManager } from "@next/third-parties/google";
-import { init, Web3OnboardProvider } from "@web3-onboard/react";
+
 import type { AppProps } from "next/app";
 import { Montserrat } from "next/font/google";
+
 import { onboardConfig } from "../utils/connectWallet";
+import wagmi from "@web3-onboard/wagmi";
+import { init, Web3OnboardProvider } from "@web3-onboard/react";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 const wen3Onboard = init({
+  wagmi,
   connect: {
     autoConnectAllPreviousWallet: true,
   },
@@ -17,6 +21,11 @@ const wen3Onboard = init({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [activeWallet] = wen3Onboard.state.get().wallets;
+  const { wagmiConnector } = activeWallet;
+
+  console.log(wagmiConnector);
+
   return (
     <div className={`${montserrat.className}`}>
       <Web3OnboardProvider web3Onboard={wen3Onboard}>
