@@ -25,8 +25,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <Navbar />
           <Component {...pageProps} />
           <VersionDisplay
-            version={process.env.NEXT_PUBLIC_VERSION as string}
-            githubRelease={process.env.NEXT_PUBLIC_GITHUB_RELEASE as string}
+            version={"0.9.1"}
+            githubRelease={
+              "https://github.com/RequestNetwork/invoicing-template/releases"
+            }
           />
         </Provider>
       </Web3OnboardProvider>
