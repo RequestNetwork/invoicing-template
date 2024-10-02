@@ -25,7 +25,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <Navbar />
           <Component {...pageProps} />
           <VersionDisplay
-            version={"0.9.1"}
             githubRelease={
               "https://github.com/RequestNetwork/invoicing-template/releases"
             }
