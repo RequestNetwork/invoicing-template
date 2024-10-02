@@ -6,6 +6,7 @@ import { init, Web3OnboardProvider } from "@web3-onboard/react";
 import type { AppProps } from "next/app";
 import { Montserrat } from "next/font/google";
 import { onboardConfig } from "../utils/connectWallet";
+import VersionDisplay from "@/components/common/VersionBadge";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -23,6 +24,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <Provider>
           <Navbar />
           <Component {...pageProps} />
+          <VersionDisplay
+            version={process.env.NEXT_PUBLIC_VERSION as string}
+            githubRelease={process.env.NEXT_PUBLIC_GITHUB_RELEASE as string}
+          />
         </Provider>
       </Web3OnboardProvider>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />
