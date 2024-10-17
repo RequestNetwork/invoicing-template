@@ -5,35 +5,32 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
-import { WalletState } from "@web3-onboard/core";
-import { useConnectWallet } from "@web3-onboard/react";
 import { initializeRequestNetwork } from "./initializeRN";
 import type { RequestNetwork } from "@requestnetwork/request-client.js";
+import { useAccount, useWalletClient } from "wagmi";
 
 interface ContextType {
-  wallet: WalletState | null;
   requestNetwork: RequestNetwork | null;
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const Provider = ({ children }: { children: ReactNode }) => {
-  const [{ wallet }] = useConnectWallet();
+  const { data: walletClient } = useWalletClient();
+  const { address, isConnected, chainId } = useAccount();
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(
     null
   );
 
   useEffect(() => {
-    if (wallet) {
-      const { provider } = wallet;
-      initializeRequestNetwork(setRequestNetwork, provider);
+    if (walletClient && isConnected && address && chainId) {
+      initializeRequestNetwork(setRequestNetwork, walletClient);
     }
-  }, [wallet]);
+  }, [walletClient, chainId, address, isConnected]);
 
   return (
     <Context.Provider
       value={{
-        wallet,
         requestNetwork,
       }}
     >

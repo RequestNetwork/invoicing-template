@@ -21,7 +21,10 @@ interface CreateInvoiceFormElement {
 
 interface InvoiceDashboardProps extends HTMLElement {
   config: IConfig;
-  wallet: WalletState;
+  wallet: {
+    address: string;
+    network: number;
+  };
   requestNetwork: RequestNetwork;
   currencies: any;
 }

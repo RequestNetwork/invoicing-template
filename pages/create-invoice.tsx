@@ -1,11 +1,12 @@
-import CreateInvoiceForm from "@requestnetwork/create-invoice-form/react";
 import Head from "next/head";
+import CreateInvoiceForm from "@requestnetwork/create-invoice-form/react";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { currencies } from "@/utils/currencies";
+import { rainbowKitConfig as wagmiConfig } from "@/utils/connectWallet";
 
 export default function CreateInvoice() {
-  const { wallet, requestNetwork } = useAppContext();
+  const { requestNetwork } = useAppContext();
 
   return (
     <>
@@ -15,9 +16,9 @@ export default function CreateInvoice() {
       <div className="container m-auto  w-[100%]">
         <CreateInvoiceForm
           config={config}
-          signer={wallet?.accounts[0]?.address || ""}
-          requestNetwork={requestNetwork}
           currencies={currencies}
+          wagmiConfig={wagmiConfig}
+          requestNetwork={requestNetwork}
         />
       </div>
     </>

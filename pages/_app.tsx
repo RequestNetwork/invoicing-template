@@ -1,43 +1,37 @@
-import Navbar from "@/components/common/Navbar";
-import "@/styles/globals.css";
-import { Provider } from "@/utils/context";
-import { GoogleTagManager } from "@next/third-parties/google";
-
+import { WagmiProvider } from "wagmi";
 import type { AppProps } from "next/app";
 import { Montserrat } from "next/font/google";
-
-import { onboardConfig } from "../utils/connectWallet";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { GoogleTagManager } from "@next/third-parties/google";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { Provider } from "@/utils/context";
+import Navbar from "@/components/common/Navbar";
+import { rainbowKitConfig } from "@/utils/connectWallet";
 import VersionDisplay from "@/components/common/VersionBadge";
+import "@/styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-const wen3Onboard = init({
-  wagmi,
-  connect: {
-    autoConnectAllPreviousWallet: true,
-  },
-  ...onboardConfig,
-});
-
 export default function App({ Component, pageProps }: AppProps) {
-  const [activeWallet] = wen3Onboard.state.get().wallets;
-  const { wagmiConnector } = activeWallet;
-
-  console.log(wagmiConnector);
+  const queryClient = new QueryClient();
 
   return (
     <div className={`${montserrat.className}`}>
-      <Web3OnboardProvider web3Onboard={wen3Onboard}>
-        <Provider>
-          <Navbar />
-          <Component {...pageProps} />
-          <VersionDisplay
-            githubRelease={
-              "https://github.com/RequestNetwork/invoicing-template/releases"
-            }
-          />
-        </Provider>
-      </Web3OnboardProvider>
+      <WagmiProvider config={rainbowKitConfig}>
+        <QueryClientProvider client={queryClient}>
+          <RainbowKitProvider>
+            <Provider>
+              <Navbar /> <Component {...pageProps} />
+              <VersionDisplay
+                githubRelease={
+                  "https://github.com/RequestNetwork/invoicing-template/releases"
+                }
+              />
+            </Provider>
+          </RainbowKitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />
     </div>
   );

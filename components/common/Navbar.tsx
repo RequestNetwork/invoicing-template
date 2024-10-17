@@ -8,14 +8,15 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { useConnectWallet } from "@web3-onboard/react";
 import { ArrowUpRight, BurgerMenu, Close } from "@/icons";
-import { Button, Dropdown } from "../common";
-import { truncateAddress } from "@/utils/walletUtils";
+import { Dropdown } from "../common";
+import { useAccount, useConnect } from "wagmi";
+import ConnectButton from "./ConnectButton";
 
 const Navbar = () => {
   const router = useRouter();
-  const [{ wallet }, connect] = useConnectWallet();
+  const { connect, connectors } = useConnect();
+  const account = useAccount();
   const [isDocsHovered, setIsDocsHovered] = useState(false);
   const [isScheduleHovered, setIsScheduleHovered] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -113,17 +114,7 @@ const Navbar = () => {
           ></div>
         </div>
         <Dropdown title="Need help?" items={supportLinks} />
-        <Button
-          className="px-[14px] lg:px-[20px] text-14px lg:text-[16px] py-[8px]"
-          text={
-            wallet
-              ? truncateAddress(wallet.accounts[0].address)
-              : "Connect Wallet"
-          }
-          onClick={() => {
-            connect();
-          }}
-        />
+        <ConnectButton />
       </div>
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
         <SheetContent>
@@ -170,18 +161,7 @@ const Navbar = () => {
               <Dropdown title="Need help?" items={supportLinks} />
             </li>
             <li>
-              <Button
-                className="w-[122px] justify-center text-[16px]  py-[8px]"
-                text={
-                  wallet
-                    ? truncateAddress(wallet.accounts[0].address)
-                    : "Connect Wallet"
-                }
-                onClick={() => {
-                  connect();
-                  setIsMobileMenuOpen(false);
-                }}
-              />
+              <ConnectButton />
             </li>
           </ul>
         </SheetContent>
