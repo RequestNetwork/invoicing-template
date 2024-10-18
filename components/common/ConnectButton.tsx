@@ -81,11 +81,6 @@ const ConnectButton = () => {
                     <span className="tablet:px-[28px]  px-[14px] lg:px-[20px] bg-green lg:text-[16px] py-[8px] rounded-[8px]">
                       {account.displayName}
                     </span>
-                    <span className="tablet:px-[28px]  px-[14px] lg:px-[20px] bg-green lg:text-[16px] py-[8px] rounded-[8px]">
-                      {account.displayBalance
-                        ? ` (${account.displayBalance})`
-                        : ""}
-                    </span>
                   </button>
                 </div>
               );

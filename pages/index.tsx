@@ -2,7 +2,7 @@ import Head from "next/head";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { currencies } from "@/utils/currencies";
-import { rainbowKitConfig as wagmiConfig } from "@/utils/connectWallet";
+import { rainbowKitConfig as wagmiConfig } from "@/utils/wagmiConfig";
 import InvoiceDashboard from "@requestnetwork/invoice-dashboard/react";
 
 export default function InvoiceDashboardPage() {

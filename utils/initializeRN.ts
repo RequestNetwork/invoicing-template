@@ -2,9 +2,9 @@ import { RequestNetwork } from "@requestnetwork/request-client.js";
 import { Web3SignatureProvider } from "@requestnetwork/web3-signature";
 import { getTheGraphClient } from "@requestnetwork/payment-detection";
 
-export const initializeRequestNetwork = (setter: any, provider: any) => {
+export const initializeRequestNetwork = (setter: any, walletClient: any) => {
   try {
-    const web3SignatureProvider = new Web3SignatureProvider(provider);
+    const web3SignatureProvider = new Web3SignatureProvider(walletClient);
 
     const requestNetwork = new RequestNetwork({
       nodeConnectionConfig: {
