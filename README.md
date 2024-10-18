@@ -87,18 +87,50 @@ Before deploying, ensure you have created a `.env` or `.env.local` file in the r
 
 ## Configuration
 
-In your next.config.js file, ensure you have the following configuration:
+This configuration file (`wagmiConfig.ts`) is used to set up the wallet connection functionality for the Request Invoicing platform, leveraging `wagmi` and `RainbowKit`.
 
-```javascript
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: false,
-};
+It supports multiple blockchain networks and a wide variety of wallet providers. The configuration is structured to allow easy integration of wallet connections in a React or Next.js app.
 
-export default nextConfig;
-```
+## Configuration Details
 
-#### Explanation
+## [wagmiConfig](https://github.com/RequestNetwork/invoicing-template/blob/main/utils/wagmiConfig.ts)
 
-This configuration ensures that the Svelte web components render correctly. The swcMinify: false setting is crucial because Svelte web components and their rendering nature can sometimes conflict with aggressive minification processes. Disabling SWC minification helps prevent potential issues with web component rendering.
+### Chains
+
+The following chains are supported in the current setup:
+
+- Binance Smart Chain (BSC)
+- Celo
+- Base
+- Fuse
+- zkSync
+- Fantom
+- CoreDAO
+- Polygon
+- Ethereum Mainnet
+- Sepolia
+- Arbitrum
+- Moonbeam
+- Optimism
+- Avalanche
+- Gnosis
+
+### Wallets
+
+The following wallets are grouped into two categories:
+
+- **Recommended Wallets**:
+
+  - Injected Wallets
+  - MetaMask
+  - WalletConnect
+
+- **Other Wallets**:
+  - Safe Wallet
+  - Coinbase Wallet
+  - Ledger Wallet
+  - Trust Wallet
+
+### Transports (RPC URLs)
+
+Each chain is assigned an RPC URL, either from environment variables or using a default public RPC. You can configure these in your `.env` file using variables like `NEXT_PUBLIC_RPC_URL_<CHAIN_NAME>`.

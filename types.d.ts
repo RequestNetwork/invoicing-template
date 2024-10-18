@@ -1,5 +1,5 @@
 import { IConfig } from "@/utils/types";
-import { WalletState } from "@web3-onboard/core";
+import { Config as WagmiConfig } from "wagmi";
 import type { RequestNetwork } from "@requestnetwork/request-client.js";
 
 declare global {
@@ -21,14 +21,14 @@ interface CreateInvoiceFormElement {
 
 interface InvoiceDashboardProps extends HTMLElement {
   config: IConfig;
-  wallet: WalletState;
+  wagmiConfig: WagmiConfig;
   requestNetwork: RequestNetwork;
   currencies: any;
 }
 
 interface CreateInvoiceFormProps extends HTMLElement {
   config: IConfig;
-  signer: string;
+  wagmiConfig: WagmiConfig;
   requestNetwork: RequestNetwork;
   currencies: any;
 }

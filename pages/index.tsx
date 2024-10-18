@@ -1,12 +1,11 @@
+import Head from "next/head";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { currencies } from "@/utils/currencies";
+import { rainbowKitConfig as wagmiConfig } from "@/utils/wagmiConfig";
 import InvoiceDashboard from "@requestnetwork/invoice-dashboard/react";
-import { useConnectWallet } from "@web3-onboard/react";
-import Head from "next/head";
 
 export default function InvoiceDashboardPage() {
-  const [{ wallet }] = useConnectWallet();
   const { requestNetwork } = useAppContext();
 
   return (
@@ -19,7 +18,7 @@ export default function InvoiceDashboardPage() {
           config={config}
           currencies={currencies}
           requestNetwork={requestNetwork}
-          wallet={wallet}
+          wagmiConfig={wagmiConfig}
         />
       </div>
     </>
