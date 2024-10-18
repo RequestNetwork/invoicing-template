@@ -47,7 +47,7 @@ const ConnectButton = () => {
               if (chain.unsupported) {
                 return (
                   <button onClick={openChainModal} type="button">
-                    Wrong network
+                    Unsupported network
                   </button>
                 );
               }
