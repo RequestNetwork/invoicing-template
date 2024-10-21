@@ -1,9 +1,14 @@
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { currencies } from "@/utils/currencies";
 import { rainbowKitConfig as wagmiConfig } from "@/utils/wagmiConfig";
-import CreateInvoiceForm from "@requestnetwork/create-invoice-form/react";
+
+const CreateInvoiceForm = dynamic(
+  () => import("@requestnetwork/create-invoice-form/react"),
+  { ssr: false, loading: () => <p>Loading...</p> }
+);
 
 export default function CreateInvoice() {
   const { requestNetwork } = useAppContext();
