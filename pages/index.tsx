@@ -1,13 +1,17 @@
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { config } from "@/utils/config";
 import { useAppContext } from "@/utils/context";
 import { currencies } from "@/utils/currencies";
 import { rainbowKitConfig as wagmiConfig } from "@/utils/wagmiConfig";
-import InvoiceDashboard from "@requestnetwork/invoice-dashboard/react";
+
+const InvoiceDashboard = dynamic(
+  () => import("@requestnetwork/invoice-dashboard/react"),
+  { ssr: false, loading: () => <p>Loading...</p> }
+);
 
 export default function InvoiceDashboardPage() {
   const { requestNetwork } = useAppContext();
-
   return (
     <>
       <Head>
