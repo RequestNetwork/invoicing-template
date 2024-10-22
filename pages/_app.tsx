@@ -4,10 +4,10 @@ import { Montserrat } from "next/font/google";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { Navbar, VersionDisplay } from "@/components/common";
 import { Provider } from "@/utils/context";
-import Navbar from "@/components/common/Navbar";
 import { rainbowKitConfig } from "@/utils/wagmiConfig";
-import VersionDisplay from "@/components/common/VersionBadge";
+
 import "@/styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
