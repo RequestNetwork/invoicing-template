@@ -7,19 +7,23 @@ import {
 } from "@/components/ui/Sheet";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowUpRight, BurgerMenu, Close } from "@/icons";
 import { Dropdown } from "../common";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount, useConnect, useWalletClient } from "wagmi";
 import ConnectButton from "./ConnectButton";
+import { useAppContext } from "@/utils/context";
+import { useEthersSigner } from '@/utils/ethers'
 
 const Navbar = () => {
   const router = useRouter();
   const { connect, connectors } = useConnect();
+  const signer = useEthersSigner()
   const account = useAccount();
   const [isDocsHovered, setIsDocsHovered] = useState(false);
   const [isScheduleHovered, setIsScheduleHovered] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { disconnectWalletFromCypherProvider, connectWalletToCypherProvider } = useAppContext()
 
   const links = [
     {
@@ -42,6 +46,16 @@ const Navbar = () => {
       href: "https://discord.com/channels/468974345222619136/1103420140181274645",
     },
   ];
+
+  useEffect(() => {
+    if (!account.isConnected) {
+      console.log("disconnecting");
+      disconnectWalletFromCypherProvider();
+    } else {
+      console.log("connected");
+      connectWalletToCypherProvider(signer, account.address);
+    }
+  });
 
   return (
     <nav className="relative h-full flex items-center p-[20px] gap-[20px] xl:gap-[60px] bg-white shadow-small mb-[30px] tablet:mb-[80px]">
