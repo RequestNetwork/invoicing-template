@@ -42,10 +42,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         'datil-dev',
         new HttpDataAccess({
           nodeConnectionConfig: {
-            baseURL: 'http://localhost:8080/',
+            baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
           },
           httpConfig: {
-            getConfirmationMaxRetry: 120,
+            getConfirmationMaxRetry: 360,
           },
         }),
       ),
@@ -59,11 +59,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       const requestNetwork = new RequestNetwork({
         cypherProvider,
         nodeConnectionConfig: {
-          baseURL: 'http://localhost:8080/',
+          baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
         },
         signatureProvider: web3SignatureProvider,
         httpConfig: {
-          getConfirmationMaxRetry: 120,
+          getConfirmationMaxRetry: 360,
         },
         paymentOptions: {
           getSubgraphClient: (chain: string) => {
