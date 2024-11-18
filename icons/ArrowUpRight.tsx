@@ -1,5 +1,6 @@
 import * as React from "react";
 import { SVGProps } from "react";
+
 const ArrowUpRight = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -10,7 +11,7 @@ const ArrowUpRight = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#0BB489"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
@@ -18,4 +19,5 @@ const ArrowUpRight = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
+
 export default ArrowUpRight;
