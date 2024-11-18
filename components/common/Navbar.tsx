@@ -49,10 +49,8 @@ const Navbar = () => {
 
   useEffect(() => {
     if (!account.isConnected) {
-      console.log("disconnecting");
       disconnectWalletFromCypherProvider();
     } else {
-      console.log("connected");
       connectWalletToCypherProvider(signer, account.address);
     }
   });

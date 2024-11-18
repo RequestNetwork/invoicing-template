@@ -16,7 +16,7 @@ import { CypherProviderTypes } from '@requestnetwork/types';
 interface ContextType {
   requestNetwork: RequestNetwork | null;
   isWalletConnectedToCypherProvider: boolean;
-  connectWalletToCypherProvider: (signer: any, walletAddress: string) => void;
+  connectWalletToCypherProvider: (signer: unknown, walletAddress: string) => void;
   disconnectWalletFromCypherProvider: () => void;
 }
 
@@ -38,8 +38,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const initializeCypherProvider = () => {
     setCypherProvider(
       new LitProtocolProvider(
-        'ethereum',
-        'datil-dev',
+        process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
+        process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil-dev',
         {
           baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
         },
@@ -47,7 +47,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const initializeRequestNetwork = (walletClient: any) => {
+  const initializeRequestNetwork = (walletClient: unknown) => {
     try {
       const web3SignatureProvider = new Web3SignatureProvider(walletClient);
 
@@ -150,11 +150,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const disconnectWalletFromCypherProvider = () => {
     if (cypherProvider) {
+      setRequestNetwork(null);
       cypherProvider.disconnectWallet();
       setIsWalletConnectedToCypherProvider(false);
+      setCypherProvider(null);
     }
-    setCypherProvider(null);
-    setRequestNetwork(null);
   };  
 
   useEffect(() => {
