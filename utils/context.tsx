@@ -40,14 +40,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       new LitProtocolProvider(
         'ethereum',
         'datil-dev',
-        new HttpDataAccess({
-          nodeConnectionConfig: {
-            baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
-          },
-          httpConfig: {
-            getConfirmationMaxRetry: 360,
-          },
-        }),
+        {
+          baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
+        },
       ),
     );
   };
