@@ -1,7 +1,7 @@
-import { ConnectButton as RainbowKitButton } from "@rainbow-me/rainbowkit";
-import Image from "next/image";
-
 import React from "react";
+import Image from "next/image";
+import Button from "./Button";
+import { ConnectButton as RainbowKitButton } from "@rainbow-me/rainbowkit";
 
 const ConnectButton = () => {
   return (
@@ -35,53 +35,49 @@ const ConnectButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button
+                  <Button
+                    outlined
+                    text="Connect Wallet"
+                    className="font-semibold"
                     onClick={openConnectModal}
-                    type="button"
-                    className={`flex items-center gap-[10px] disabled:cursor-not-allowed disabled:bg-grey disabled:text-dark-grey text-white rounded-[8px] hover:bg-dark-green transition-all text-[14px] tablet:px-[28px]  px-[14px] lg:px-[20px] text-14px lg:text-[16px] py-[8px] bg-green focus:outline-none`}
-                  >
-                    Connect Wallet
-                  </button>
+                  />
                 );
               }
               if (chain.unsupported) {
                 return (
-                  <button onClick={openChainModal} type="button">
-                    Unsupported network
-                  </button>
+                  <Button onClick={openChainModal} text="Unsupported network" />
                 );
               }
               return (
                 <div style={{ display: "flex", gap: 12 }}>
-                  <button
+                  <Button
+                    className="font-medium"
+                    outlined
                     onClick={openChainModal}
-                    className="flex items-center text-white tablet:px-[28px]  px-[14px] lg:px-[20px] bg-green lg:text-[16px] py-[8px] rounded-[8px] gap-[10px]"
-                    type="button"
-                  >
-                    {chain.hasIcon && (
-                      <div>
-                        {chain.iconUrl && (
-                          <Image
-                            alt={chain.name ?? "Chain icon"}
-                            src={chain.iconUrl}
-                            width={12}
-                            height={12}
-                            className="w-[20px] h-[20px]"
-                          />
-                        )}
-                      </div>
-                    )}
-                    <span>{chain.name}</span>
-                  </button>
-                  <button
+                    text={chain.name as string}
+                    element={{
+                      content: chain.hasIcon && (
+                        <div>
+                          {chain.iconUrl && (
+                            <Image
+                              alt={chain.name ?? "Chain icon"}
+                              src={chain.iconUrl}
+                              width={12}
+                              height={12}
+                              className="w-[20px] h-[20px]"
+                            />
+                          )}
+                        </div>
+                      ),
+                      position: "left",
+                    }}
+                  />
+                  <Button
+                    outlined
+                    className="font-medium"
+                    text={account.displayName}
                     onClick={openAccountModal}
-                    type="button"
-                    className="text-[14px] text-white flex gap-[10px]"
-                  >
-                    <span className="tablet:px-[28px]  px-[14px] lg:px-[20px] bg-green lg:text-[16px] py-[8px] rounded-[8px]">
-                      {account.displayName}
-                    </span>
-                  </button>
+                  />
                 </div>
               );
             })()}
