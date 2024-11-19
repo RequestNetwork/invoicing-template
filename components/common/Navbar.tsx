@@ -82,7 +82,11 @@ const Navbar = () => {
           <ArrowUpRight />
         </a>
         <ConnectButton />
-        <Button text="Book a demo" href={process.env.NEXT_PUBLIC_DEMO_URL} />
+        <Button
+          text="Book a demo"
+          href={process.env.NEXT_PUBLIC_DEMO_URL}
+          anchorProps={{ target: "_blank", rel: "noreferrer noopener" }}
+        />
       </div>
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
         <SheetContent>

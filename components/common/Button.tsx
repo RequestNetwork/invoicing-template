@@ -15,6 +15,13 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   href?: string;
   outlined?: boolean;
+  anchorProps?: AnchorSpecificProps;
+  ariaLabel?: string;
+}
+
+interface AnchorSpecificProps {
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
 }
 
 const Button = ({
@@ -28,6 +35,8 @@ const Button = ({
   type = "button",
   href,
   outlined = false,
+  anchorProps,
+  ariaLabel,
 }: ButtonProps) => {
   const commonClassNames = `${className} w-fit flex items-center gap-[10px] ${element?.position === "right" ? "flex-row-reverse" : "flex-row"} disabled:cursor-not-allowed disabled:bg-grey disabled:text-dark-grey rounded-[8px] hover:bg-dark-green transition-all text-[14px] px-[12px] py-[8px] ${color} ${
     outlined
@@ -47,8 +56,8 @@ const Button = ({
     <a
       href={href}
       className={commonClassNames}
-      target="_blank"
-      rel="noreferrer noopener"
+      {...anchorProps}
+      aria-label={ariaLabel || text}
     >
       {content}
     </a>
