@@ -38,8 +38,8 @@ const Dropdown = ({ outlined = true, title, items }: DropdownProps) => {
         className={`${
           !outlined
             ? "bg-green hover:bg-dark-green"
-            : "bg-transparent text-dark-green border-dark-green border-[1px] hover:border-green hover:text-green"
-        }   focus:ring-transparent focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[14px] lg:text-sm px-[12px] lg:px-[28px] py-[8px] text-center inline-flex items-center`}
+            : "bg-transparent text-green hover:text-dark-green"
+        }  w-fit focus:ring-transparent focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-[14px] lg:text-sm text-center inline-flex items-center`}
         type="button"
       >
         {title}
@@ -76,7 +76,7 @@ const Dropdown = ({ outlined = true, title, items }: DropdownProps) => {
                   target="_blank"
                   href={item.href}
                   rel="noreferrer noopener"
-                  className="px-3 py-2 hover:bg-gray-100 flex items-center gap-2"
+                  className="px-3 py-2 hover:bg-gray-100 flex items-center gap-[6px]"
                 >
                   {item.name}
                   <ArrowUpRight />
