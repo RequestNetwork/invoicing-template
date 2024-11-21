@@ -12,14 +12,14 @@ const InvoiceDashboard = dynamic(
 );
 
 export default function InvoiceDashboardPage() {
-  const { requestNetwork, isWalletConnectedToCypherProvider } = useAppContext();
+  const { requestNetwork, isWalletConnectedToCipherProvider } = useAppContext();
   return (
     <>
       <Head>
         <title>Request Invoicing</title>
       </Head>
       <div className="container m-auto  w-[100%]">
-        {isWalletConnectedToCypherProvider ? (<InvoiceDashboard
+        {isWalletConnectedToCipherProvider ? (<InvoiceDashboard
           config={config}
           currencies={currencies}
           requestNetwork={requestNetwork}

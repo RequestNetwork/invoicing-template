@@ -7,17 +7,15 @@ import React, {
 } from "react";
 import { useAccount, useWalletClient } from "wagmi";
 import { RequestNetwork } from '@requestnetwork/request-client.js';
-import { LitProtocolProvider } from '@requestnetwork/lit-protocol-cypher';
+import { LitProtocolProvider } from '@requestnetwork/lit-protocol-cipher';
 import { Web3SignatureProvider } from '@requestnetwork/web3-signature';
 import { getTheGraphClient } from '@requestnetwork/payment-detection';
-import HttpDataAccess from '@requestnetwork/request-client.js/dist/http-data-access';
-import { CypherProviderTypes } from '@requestnetwork/types';
 
 interface ContextType {
   requestNetwork: RequestNetwork | null;
-  isWalletConnectedToCypherProvider: boolean;
-  connectWalletToCypherProvider: (signer: unknown, walletAddress: string) => void;
-  disconnectWalletFromCypherProvider: () => void;
+  isWalletConnectedToCipherProvider: boolean;
+  connectWalletToCipherProvider: (signer: unknown, walletAddress: string) => void;
+  disconnectWalletFromCipherProvider: () => void;
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
@@ -28,15 +26,15 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(
     null
   );
-  const [cypherProvider, setCypherProvider] =
-    useState<CypherProviderTypes.ICypherProvider | null>(null);
+  const [cipherProvider, setCipherProvider] =
+    useState<LitProtocolProvider | undefined>();
   const [
-    isWalletConnectedToCypherProvider,
-    setIsWalletConnectedToCypherProvider,
+    isWalletConnectedToCipherProvider,
+    setIsWalletConnectedToCipherProvider,
   ] = useState(false);
 
-  const initializeCypherProvider = () => {
-    setCypherProvider(
+  const initializeCipherProvider = () => {
+    setCipherProvider(
       new LitProtocolProvider(
         process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
         process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil-dev',
@@ -52,7 +50,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       const web3SignatureProvider = new Web3SignatureProvider(walletClient);
 
       const requestNetwork = new RequestNetwork({
-        cypherProvider,
+        cipherProvider,
         nodeConnectionConfig: {
           baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
         },
@@ -137,42 +135,42 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const connectWalletToCypherProvider = async (
+  const connectWalletToCipherProvider = async (
     signer: any,
     walletAddress: string,
   ) => {
-    if (cypherProvider) {
-      await cypherProvider.getSessionSignatures(signer, walletAddress);
-      console.log('Connected to Cypher Provider');
-      setIsWalletConnectedToCypherProvider(true);
+    if (cipherProvider) {
+      await cipherProvider?.getSessionSignatures(signer, walletAddress);
+      console.log('Connected to Cipher Provider');
+      setIsWalletConnectedToCipherProvider(true);
     }
   };
 
-  const disconnectWalletFromCypherProvider = () => {
-    if (cypherProvider) {
+  const disconnectWalletFromCipherProvider = () => {
+    if (cipherProvider) {
       setRequestNetwork(null);
-      cypherProvider.disconnectWallet();
-      setIsWalletConnectedToCypherProvider(false);
-      setCypherProvider(null);
+      cipherProvider?.disconnectWallet();
+      setIsWalletConnectedToCipherProvider(false);
+      setCipherProvider(undefined);
     }
   };  
 
   useEffect(() => {
     if (walletClient && isConnected && address && chainId) {
-      initializeCypherProvider();
+      initializeCipherProvider();
     }
   }, [walletClient, chainId, address, isConnected]);
 
   useEffect(() => {
-    if (cypherProvider && isWalletConnectedToCypherProvider) {
+    if (cipherProvider && isWalletConnectedToCipherProvider) {
       initializeRequestNetwork(walletClient);
     }
-  }, [cypherProvider, isWalletConnectedToCypherProvider]);
+  }, [cipherProvider, isWalletConnectedToCipherProvider]);
 
   return (
     <Context.Provider
       value={{
-        requestNetwork, isWalletConnectedToCypherProvider, connectWalletToCypherProvider, disconnectWalletFromCypherProvider
+        requestNetwork, isWalletConnectedToCipherProvider, connectWalletToCipherProvider, disconnectWalletFromCipherProvider
       }}
     >
       {children}

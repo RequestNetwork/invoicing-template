@@ -23,7 +23,7 @@ const Navbar = () => {
   const [isDocsHovered, setIsDocsHovered] = useState(false);
   const [isScheduleHovered, setIsScheduleHovered] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { disconnectWalletFromCypherProvider, connectWalletToCypherProvider } = useAppContext()
+  const { disconnectWalletFromCipherProvider, connectWalletToCipherProvider } = useAppContext()
 
   const links = [
     {
@@ -49,9 +49,9 @@ const Navbar = () => {
 
   useEffect(() => {
     if (!account.isConnected) {
-      disconnectWalletFromCypherProvider();
+      disconnectWalletFromCipherProvider();
     } else {
-      connectWalletToCypherProvider(signer, account.address);
+      connectWalletToCipherProvider(signer, account.address as string);
     }
   });
 
