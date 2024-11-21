@@ -6,6 +6,17 @@ on:
     branches: [main]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
   deploy:
     runs-on: ubuntu-latest
     steps:
