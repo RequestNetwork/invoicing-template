@@ -1,6 +1,7 @@
 import { IConfig } from "@/utils/types";
 import { Config as WagmiConfig } from "wagmi";
 import type { RequestNetwork } from "@requestnetwork/request-client.js";
+import type { CurrencyTypes } from "@requestnetwork/types";
 
 declare global {
   namespace JSX {
@@ -23,12 +24,12 @@ interface InvoiceDashboardProps extends HTMLElement {
   config: IConfig;
   wagmiConfig: WagmiConfig;
   requestNetwork: RequestNetwork;
-  currencies: any;
+  currencies: CurrencyTypes.CurrencyInput[];
 }
 
 interface CreateInvoiceFormProps extends HTMLElement {
   config: IConfig;
   wagmiConfig: WagmiConfig;
   requestNetwork: RequestNetwork;
-  currencies: any;
+  currencies: CurrencyTypes.CurrencyInput[];
 }
