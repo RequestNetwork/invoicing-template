@@ -13,7 +13,7 @@
     "@radix-ui/react-dialog": "^1.1.0",
     "@rainbow-me/rainbowkit": "^2.2.0",
     "@requestnetwork/create-invoice-form": "0.11.1",
-    "@requestnetwork/invoice-dashboard": "0.10.0",
+    "@requestnetwork/invoice-dashboard": "0.11.0",
     "@requestnetwork/payment-detection": "0.45.1",
     "@requestnetwork/request-client.js": "0.50.0",
     "@requestnetwork/web3-signature": "0.8.1",
