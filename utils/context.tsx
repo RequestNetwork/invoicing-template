@@ -165,7 +165,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     if (cipherProvider && isWalletConnectedToCipherProvider) {
       initializeRequestNetwork(walletClient);
     }
-  }, [cipherProvider, isWalletConnectedToCipherProvider]);
+  }, [cipherProvider, isWalletConnectedToCipherProvider, walletClient]);
 
   return (
     <Context.Provider
