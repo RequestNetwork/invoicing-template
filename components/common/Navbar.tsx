@@ -44,13 +44,27 @@ const Navbar = () => {
     },
   ];
 
+  const [isConnecting, setIsConnecting] = useState(false);
+
   useEffect(() => {
-    if (!account.isConnected) {
-      disconnectWalletFromCipherProvider();
-    } else {
-      connectWalletToCipherProvider(signer, account.address as string);
-    }
-  });
+    const handleConnection = async () => {
+      try {
+        setIsConnecting(true);
+        if (!account.isConnected) {
+          disconnectWalletFromCipherProvider();
+        } else {
+          await connectWalletToCipherProvider(signer, account.address as string);
+        }
+      } catch (error) {
+        console.error('Wallet connection error:', error);
+        // Handle error appropriately (e.g., show user feedback)
+      } finally {
+        setIsConnecting(false);
+      }
+    };
+
+    handleConnection();
+  }, [account.isConnected, signer, account.address, disconnectWalletFromCipherProvider, connectWalletToCipherProvider]);
 
   return (
     <nav className="relative h-full flex items-center p-[20px] gap-[20px] xl:gap-[60px] bg-white shadow-small mb-[30px] tablet:mb-[80px]">
