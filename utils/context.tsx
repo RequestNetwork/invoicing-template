@@ -34,15 +34,20 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   ] = useState(false);
 
   const initializeCipherProvider = () => {
-    setCipherProvider(
-      new LitProtocolProvider(
-        process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
-        process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil-dev',
-        {
-          baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
-        },
-      ),
-    );
+    try {
+      setCipherProvider(
+        new LitProtocolProvider(
+          process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
+          process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil-dev',
+          {
+            baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
+          },
+        ),
+      );
+    } catch (error) {
+      console.error('Failed to initialize Cipher Provider:', error);
+      setCipherProvider(undefined);
+    }
   };
 
   const initializeRequestNetwork = (walletClient: unknown) => {
