@@ -145,9 +145,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     walletAddress: string,
   ) => {
     if (cipherProvider) {
-      await cipherProvider?.getSessionSignatures(signer, walletAddress);
-      console.log('Connected to Cipher Provider');
-      setIsWalletConnectedToCipherProvider(true);
+      try {
+        await cipherProvider?.getSessionSignatures(signer, walletAddress);
+        console.log('Connected to Cipher Provider');
+        setIsWalletConnectedToCipherProvider(true);
+      } catch (error) {
+        console.error('Failed to connect to Cipher Provider:', error);
+        setIsWalletConnectedToCipherProvider(false);
+      }
     }
   };
 
