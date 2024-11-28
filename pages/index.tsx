@@ -12,20 +12,21 @@ const InvoiceDashboard = dynamic(
 );
 
 export default function InvoiceDashboardPage() {
-  const { requestNetwork, isWalletConnectedToCipherProvider } = useAppContext();
+  const { requestNetwork, isDecryptionSwitchedOn, switchOnDecryption } = useAppContext();
   return (
     <>
       <Head>
         <title>Request Invoicing</title>
       </Head>
       <div className="container m-auto  w-[100%]">
-        {isWalletConnectedToCipherProvider ? (<InvoiceDashboard
+         <InvoiceDashboard
           config={config}
           currencies={currencies}
           requestNetwork={requestNetwork}
           wagmiConfig={wagmiConfig}
-        />) : (<div>Connect your wallet and sign Lit Protocol message to use the invoicing feature</div>)}
-        
+          isDecryptionSwitchedOn={isDecryptionSwitchedOn}
+          switchOnDecryption={switchOnDecryption}
+        />
       </div>
     </>
   );

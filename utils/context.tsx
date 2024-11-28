@@ -1,49 +1,80 @@
+/** @format */
+
 import React, {
   createContext,
   useContext,
   useState,
   ReactNode,
   useEffect,
-} from "react";
-import { useAccount, useWalletClient } from "wagmi";
+} from 'react';
+import { useAccount, useWalletClient } from 'wagmi';
 import { RequestNetwork } from '@requestnetwork/request-client.js';
 import { LitProtocolProvider } from '@requestnetwork/lit-protocol-cipher';
 import { Web3SignatureProvider } from '@requestnetwork/web3-signature';
 import { getTheGraphClient } from '@requestnetwork/payment-detection';
+import { useEthersSigner } from './ethers'
 
 interface ContextType {
   requestNetwork: RequestNetwork | null;
   isWalletConnectedToCipherProvider: boolean;
-  connectWalletToCipherProvider: (signer: unknown, walletAddress: string) => void;
+  connectWalletToCipherProvider: (
+    signer: unknown,
+    walletAddress: string,
+  ) => void;
   disconnectWalletFromCipherProvider: () => void;
+  initializeCipherProviderClient: () => void;
+  disconnectCipherProviderClient: () => void;
+  isDecryptionSwitchedOn: boolean;
+  switchOnDecryption: (option: boolean) => void;
 }
+
+const getInitialState = () => {
+  let status;
+  if (typeof window !== "undefined") {
+    status = localStorage?.getItem('isDecryptionSwitchedOn');
+  }
+  return status ? JSON.parse(status) : false
+};
 
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const { data: walletClient } = useWalletClient();
+  const signer = useEthersSigner()
   const { address, isConnected, chainId } = useAccount();
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(
-    null
+    null,
   );
-  const [cipherProvider, setCipherProvider] =
-    useState<LitProtocolProvider | undefined>();
+  const [cipherProvider, setCipherProvider] = useState<
+    LitProtocolProvider | undefined
+  >();
   const [
     isWalletConnectedToCipherProvider,
     setIsWalletConnectedToCipherProvider,
   ] = useState(false);
 
-  const initializeCipherProvider = () => {
+  const [isDecryptionSwitchedOn, setIsDecryptionSwitchedOn] =  useState(getInitialState);
+
+  const initializeCipherProviderClient = async () => {
+    await cipherProvider?.initializeClient();
+  }
+
+  const disconnectCipherProviderClient = async () => {
+    await cipherProvider?.disconnectClient();
+  }
+
+  const instantiateCipherProvider = async () => {
     try {
-      setCipherProvider(
-        new LitProtocolProvider(
-          process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
-          process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil-dev',
-          {
-            baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
-          },
-        ),
+      const litCipherProvider = new LitProtocolProvider(
+        process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
+        process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil-test',
+        {
+          baseURL:
+            process.env.NEXT_PUBLIC_REQUEST_NODE ||
+            'https://gnosis.gateway.request.network/',
+        },
       );
+      setCipherProvider(litCipherProvider);
     } catch (error) {
       console.error('Failed to initialize Cipher Provider:', error);
       setCipherProvider(undefined);
@@ -57,7 +88,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       const requestNetwork = new RequestNetwork({
         cipherProvider,
         nodeConnectionConfig: {
-          baseURL: process.env.NEXT_PUBLIC_REQUEST_NODE || "https://gnosis.gateway.request.network/",
+          baseURL:
+            process.env.NEXT_PUBLIC_REQUEST_NODE ||
+            'https://gnosis.gateway.request.network/',
         },
         signatureProvider: web3SignatureProvider,
         httpConfig: {
@@ -163,24 +196,50 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       setIsWalletConnectedToCipherProvider(false);
       setCipherProvider(undefined);
     }
-  };  
+  };
+
+  const switchOnDecryption = async (option: boolean) => {
+    if (cipherProvider) {
+      cipherProvider.switchOnOffDecryption(option);
+      if(option) {
+        await initializeCipherProviderClient();
+        await connectWalletToCipherProvider(signer, address as string);
+        setIsDecryptionSwitchedOn(true);
+      } else {
+        await disconnectCipherProviderClient();
+        setIsDecryptionSwitchedOn(false);
+      }
+    }
+  };
 
   useEffect(() => {
     if (walletClient && isConnected && address && chainId) {
-      initializeCipherProvider();
+      instantiateCipherProvider();
     }
   }, [walletClient, chainId, address, isConnected]);
 
   useEffect(() => {
-    if (cipherProvider && isWalletConnectedToCipherProvider) {
+    if (cipherProvider) {
       initializeRequestNetwork(walletClient);
+      switchOnDecryption(isDecryptionSwitchedOn)
     }
-  }, [cipherProvider, isWalletConnectedToCipherProvider, walletClient]);
+  }, [cipherProvider, walletClient]);
+
+  useEffect(() => {
+    localStorage.setItem('isDecryptionSwitchedOn', JSON.stringify(isDecryptionSwitchedOn));
+  }, [isDecryptionSwitchedOn])
 
   return (
     <Context.Provider
       value={{
-        requestNetwork, isWalletConnectedToCipherProvider, connectWalletToCipherProvider, disconnectWalletFromCipherProvider
+        requestNetwork,
+        isWalletConnectedToCipherProvider,
+        initializeCipherProviderClient,
+        disconnectCipherProviderClient,
+        connectWalletToCipherProvider,
+        disconnectWalletFromCipherProvider,
+        isDecryptionSwitchedOn,
+        switchOnDecryption,
       }}
     >
       {children}
@@ -191,7 +250,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 export const useAppContext = () => {
   const context = useContext(Context);
   if (!context) {
-    throw new Error("useAppContext must be used within a Context Provider");
+    throw new Error('useAppContext must be used within a Context Provider');
   }
   return context;
 };

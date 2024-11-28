@@ -20,7 +20,7 @@ const Navbar = () => {
   const signer = useEthersSigner()
   const account = useAccount();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { disconnectWalletFromCipherProvider, connectWalletToCipherProvider } = useAppContext()
+  const { disconnectWalletFromCipherProvider } = useAppContext()
 
   const links = [
     {
@@ -52,8 +52,6 @@ const Navbar = () => {
         setIsConnecting(true);
         if (!account.isConnected) {
           disconnectWalletFromCipherProvider();
-        } else {
-          await connectWalletToCipherProvider(signer, account.address as string);
         }
       } catch (error) {
         console.error('Wallet connection error:', error);
@@ -64,7 +62,7 @@ const Navbar = () => {
     };
 
     handleConnection();
-  }, [account.isConnected, signer, account.address, disconnectWalletFromCipherProvider, connectWalletToCipherProvider]);
+  }, [account.isConnected, signer, account.address, disconnectWalletFromCipherProvider]);
 
   return (
     <nav className="relative h-full flex items-center p-[20px] gap-[20px] xl:gap-[60px] bg-white shadow-small mb-[30px] tablet:mb-[80px]">
