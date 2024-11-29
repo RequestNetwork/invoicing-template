@@ -22,8 +22,6 @@ interface ContextType {
     walletAddress: string,
   ) => void;
   disconnectWalletFromCipherProvider: () => void;
-  initializeCipherProviderClient: () => void;
-  disconnectCipherProviderClient: () => void;
   isDecryptionSwitchedOn: boolean;
   switchOnDecryption: (option: boolean) => void;
 }
@@ -55,14 +53,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const [isDecryptionSwitchedOn, setIsDecryptionSwitchedOn] =  useState(getInitialState);
 
-  const initializeCipherProviderClient = async () => {
-    await cipherProvider?.initializeClient();
-  }
-
-  const disconnectCipherProviderClient = async () => {
-    await cipherProvider?.disconnectClient();
-  }
-
   const instantiateCipherProvider = async () => {
     try {
       const litCipherProvider = new LitProtocolProvider(
@@ -74,6 +64,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
             'https://gnosis.gateway.request.network/',
         },
       );
+      litCipherProvider.initializeClient();
       setCipherProvider(litCipherProvider);
     } catch (error) {
       console.error('Failed to initialize Cipher Provider:', error);
@@ -200,16 +191,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const switchOnDecryption = async (option: boolean) => {
     if (cipherProvider) {
-      cipherProvider.switchOnOffDecryption(option);
       if(option) {
-        await initializeCipherProviderClient();
         await connectWalletToCipherProvider(signer, address as string);
-        setIsDecryptionSwitchedOn(true);
-      } else {
-        await disconnectCipherProviderClient();
-        setIsDecryptionSwitchedOn(false);
-      }
+      } 
+      cipherProvider.switchOnOffDecryption(option);
     }
+    setIsDecryptionSwitchedOn(option);
   };
 
   useEffect(() => {
@@ -234,8 +221,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       value={{
         requestNetwork,
         isWalletConnectedToCipherProvider,
-        initializeCipherProviderClient,
-        disconnectCipherProviderClient,
         connectWalletToCipherProvider,
         disconnectWalletFromCipherProvider,
         isDecryptionSwitchedOn,
