@@ -194,7 +194,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       if(option) {
         await connectWalletToCipherProvider(signer, address as string);
       } 
-      cipherProvider.switchOnOffDecryption(option);
+      cipherProvider.enableDecryption(option);
     }
     setIsDecryptionSwitchedOn(option);
   };
