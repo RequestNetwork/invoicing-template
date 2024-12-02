@@ -54,15 +54,17 @@ const Navbar = () => {
           disconnectWalletFromCipherProvider();
         }
       } catch (error) {
-        console.error('Wallet connection error:', error);
-        // Handle error appropriately (e.g., show user feedback)
+        if (error instanceof Error) {
+          console.error('Wallet disconnection error:', error.message);
+          // Add user notification here
+        }
       } finally {
         setIsConnecting(false);
       }
     };
 
     handleConnection();
-  }, [account.isConnected, signer, account.address, disconnectWalletFromCipherProvider]);
+  }, [account.isConnected, disconnectWalletFromCipherProvider]);
 
   return (
     <nav className="relative h-full flex items-center p-[20px] gap-[20px] xl:gap-[60px] bg-white shadow-small mb-[30px] tablet:mb-[80px]">
