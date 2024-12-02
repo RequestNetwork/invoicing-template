@@ -22,14 +22,14 @@ interface ContextType {
     walletAddress: string,
   ) => void;
   disconnectWalletFromCipherProvider: () => void;
-  isDecryptionSwitchedOn: boolean;
-  switchOnDecryption: (option: boolean) => void;
+  isDecryptionEnabled: boolean;
+  enableDecryption: (option: boolean) => void;
 }
 
 const getInitialState = () => {
   let status;
   if (typeof window !== "undefined") {
-    status = localStorage?.getItem('isDecryptionSwitchedOn');
+    status = localStorage?.getItem('isDecryptionEnabled');
   }
   return status ? JSON.parse(status) : false
 };
@@ -51,7 +51,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsWalletConnectedToCipherProvider,
   ] = useState(false);
 
-  const [isDecryptionSwitchedOn, setIsDecryptionSwitchedOn] =  useState(getInitialState);
+  const [isDecryptionEnabled, setisDecryptionEnabled] =  useState(getInitialState);
 
   const instantiateCipherProvider = async () => {
     try {
@@ -189,14 +189,14 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const switchOnDecryption = async (option: boolean) => {
+  const enableDecryption = async (option: boolean) => {
     if (cipherProvider) {
       if(option) {
         await connectWalletToCipherProvider(signer, address as string);
       } 
       cipherProvider.enableDecryption(option);
     }
-    setIsDecryptionSwitchedOn(option);
+    setisDecryptionEnabled(option);
   };
 
   useEffect(() => {
@@ -208,13 +208,13 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (cipherProvider) {
       initializeRequestNetwork(walletClient);
-      switchOnDecryption(isDecryptionSwitchedOn)
+      enableDecryption(isDecryptionEnabled)
     }
   }, [cipherProvider, walletClient]);
 
   useEffect(() => {
-    localStorage.setItem('isDecryptionSwitchedOn', JSON.stringify(isDecryptionSwitchedOn));
-  }, [isDecryptionSwitchedOn])
+    localStorage.setItem('isDecryptionEnabled', JSON.stringify(isDecryptionEnabled));
+  }, [isDecryptionEnabled])
 
   return (
     <Context.Provider
@@ -223,8 +223,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         isWalletConnectedToCipherProvider,
         connectWalletToCipherProvider,
         disconnectWalletFromCipherProvider,
-        isDecryptionSwitchedOn,
-        switchOnDecryption,
+        isDecryptionEnabled,
+        enableDecryption: enableDecryption,
       }}
     >
       {children}

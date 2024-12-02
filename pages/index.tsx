@@ -12,7 +12,7 @@ const InvoiceDashboard = dynamic(
 );
 
 export default function InvoiceDashboardPage() {
-  const { requestNetwork, isDecryptionSwitchedOn, switchOnDecryption } = useAppContext();
+  const { requestNetwork, isDecryptionEnabled, enableDecryption } = useAppContext();
   return (
     <>
       <Head>
@@ -24,8 +24,8 @@ export default function InvoiceDashboardPage() {
           currencies={currencies}
           requestNetwork={requestNetwork}
           wagmiConfig={wagmiConfig}
-          isDecryptionSwitchedOn={isDecryptionSwitchedOn}
-          switchOnDecryption={switchOnDecryption}
+          isDecryptionEnabled={isDecryptionEnabled}
+          enableDecryption={enableDecryption}
         />
       </div>
     </>
