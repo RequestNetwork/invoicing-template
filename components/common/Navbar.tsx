@@ -51,7 +51,6 @@ const Navbar = () => {
       } catch (error) {
         if (error instanceof Error) {
           console.error('Error while disconnecting from cipher provider:', error.message);
-          // Add user notification here
         }
       }
     };
