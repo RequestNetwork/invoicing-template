@@ -187,15 +187,22 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const enableDecryption = async (option: boolean) => {
-    if (cipherProvider) {
+const enableDecryption = async (option: boolean) => {
+  if (cipherProvider) {
+    try {
       if(option) {
         await connectWalletToCipherProvider(signer, address as string);
       } 
       cipherProvider.enableDecryption(option);
+      setisDecryptionEnabled(option);
+    } catch (error) {
+      console.error('Failed to enable/disable decryption:', error);
+      setisDecryptionEnabled(false);
     }
-    setisDecryptionEnabled(option);
-  };
+  } else {
+    setisDecryptionEnabled(false);
+  }
+};
 
   useEffect(() => {
     if (walletClient && isConnected && address && chainId) {
