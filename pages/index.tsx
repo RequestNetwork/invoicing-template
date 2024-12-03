@@ -19,7 +19,7 @@ export default function InvoiceDashboardPage() {
         <title>Request Invoicing</title>
       </Head>
       <div className="container m-auto  w-[100%]">
-         <InvoiceDashboard
+        <InvoiceDashboard
           config={config}
           currencies={currencies}
           requestNetwork={requestNetwork}
