@@ -7,10 +7,10 @@ import React, {
 } from 'react';
 import { useAccount, useWalletClient } from 'wagmi';
 import { RequestNetwork } from '@requestnetwork/request-client.js';
-import { LitProtocolProvider } from '@requestnetwork/lit-protocol-cipher';
 import { Web3SignatureProvider } from '@requestnetwork/web3-signature';
 import { getTheGraphClient } from '@requestnetwork/payment-detection';
 import { useEthersSigner } from './ethers'
+import { CipherProviderTypes } from '@requestnetwork/types';
 
 interface ContextType {
   requestNetwork: RequestNetwork | null;
@@ -41,9 +41,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(
     null,
   );
-  const [cipherProvider, setCipherProvider] = useState<
-    LitProtocolProvider | undefined
-  >();
+  const [cipherProvider, setCipherProvider] = useState<any>();
   const [
     isWalletConnectedToCipherProvider,
     setIsWalletConnectedToCipherProvider,
@@ -53,18 +51,21 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const instantiateCipherProvider = async () => {
     try {
-      const litCipherProvider = new LitProtocolProvider(
-        process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
-        (process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil') as 'datil',
-        {
-          baseURL:
-            process.env.NEXT_PUBLIC_REQUEST_NODE ||
-            'https://gnosis.gateway.request.network/',
-          headers: {}
-        },
-      );
-      litCipherProvider.initializeClient();
-      setCipherProvider(litCipherProvider);
+      if (typeof window !== 'undefined') {
+        const { LitProtocolProvider } = await import('@requestnetwork/lit-protocol-cipher');
+        const litCipherProvider = new LitProtocolProvider(
+          process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
+          (process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil') as 'datil',
+          {
+            baseURL:
+              process.env.NEXT_PUBLIC_REQUEST_NODE ||
+              'https://gnosis.gateway.request.network/',
+            headers: {}
+          },
+        );
+        litCipherProvider.initializeClient();
+        setCipherProvider(litCipherProvider);
+      }
     } catch (error) {
       console.error('Failed to initialize Cipher Provider:', error);
       setCipherProvider(undefined);

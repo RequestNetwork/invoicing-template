@@ -81,7 +81,8 @@ Before deploying, ensure you have created a `.env` or `.env.local` file in the r
 | NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_SEPOLIA      | Subgraph URL for Sepolia             | ❌       |
 | NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_XDAI         | Subgraph URL for Gnosis              | ❌       |
 | NEXT_PUBLIC_PAYMENTS_SUBGRAPH_URL_ZKSYNCERA    | Subgraph URL for ZkSyncEra           | ❌       |
-| NEXT_PUBLIC_GTM_ID                             | Google Tag Manager ID                | ❌       |
+| NEXT_PUBLIC_LIT_PROTOCOL_CHAIN                 | Lit Protocol Chain                   | ❌       |
+| NEXT_PUBLIC_LIT_PROTOCOL_NETWORK               | Lit Protocol Network                 | ❌       |
 
 ## Configuration
 
