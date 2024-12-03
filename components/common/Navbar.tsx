@@ -13,11 +13,9 @@ import { useAccount } from "wagmi";
 import { Button, Dropdown } from "../common";
 import ConnectButton from "./ConnectButton";
 import { useAppContext } from "@/utils/context";
-import { useEthersSigner } from '@/utils/ethers'
 
 const Navbar = () => {
   const router = useRouter();
-  const signer = useEthersSigner()
   const account = useAccount();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { disconnectWalletFromCipherProvider } = useAppContext()
@@ -44,12 +42,9 @@ const Navbar = () => {
     },
   ];
 
-  const [isConnecting, setIsConnecting] = useState(false);
-
   useEffect(() => {
     const handleConnection = async () => {
       try {
-        setIsConnecting(true);
         if (!account.isConnected) {
           disconnectWalletFromCipherProvider();
         }
@@ -58,8 +53,6 @@ const Navbar = () => {
           console.error('Error while disconnecting from cipher provider:', error.message);
           // Add user notification here
         }
-      } finally {
-        setIsConnecting(false);
       }
     };
 
