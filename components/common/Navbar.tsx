@@ -55,7 +55,7 @@ const Navbar = () => {
         }
       } catch (error) {
         if (error instanceof Error) {
-          console.error('Wallet disconnection error:', error.message);
+          console.error('Error while disconnecting from cipher provider:', error.message);
           // Add user notification here
         }
       } finally {
