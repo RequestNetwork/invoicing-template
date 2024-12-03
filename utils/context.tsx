@@ -186,10 +186,18 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const disconnectWalletFromCipherProvider = () => {
     if (cipherProvider) {
-      setRequestNetwork(null);
-      cipherProvider?.disconnectWallet();
-      setIsWalletConnectedToCipherProvider(false);
-      setCipherProvider(undefined);
+      try {
+        setRequestNetwork(null);
+        cipherProvider?.disconnectWallet();
+        setIsWalletConnectedToCipherProvider(false);
+        setCipherProvider(undefined);
+      } catch (error) {
+        console.error('Failed to disconnect from Cipher Provider:', error);
+        // Still reset state to ensure clean disconnection
+        setIsWalletConnectedToCipherProvider(false);
+        setCipherProvider(undefined);
+        setRequestNetwork(null);
+      }
     }
   };
 
