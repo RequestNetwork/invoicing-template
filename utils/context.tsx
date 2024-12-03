@@ -216,7 +216,7 @@ const enableDecryption = async (option: boolean) => {
       initializeRequestNetwork(walletClient);
       enableDecryption(isDecryptionEnabled)
     }
-  }, [cipherProvider, walletClient]);
+  }, [cipherProvider, walletClient, isDecryptionEnabled, enableDecryption]);
 
   useEffect(() => {
     localStorage.setItem('isDecryptionEnabled', JSON.stringify(isDecryptionEnabled));
