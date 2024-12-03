@@ -28,7 +28,12 @@ const getInitialState = () => {
   if (typeof window !== "undefined") {
     status = localStorage?.getItem('isDecryptionEnabled');
   }
-  return status ? JSON.parse(status) : false
+  try {
+    return status ? JSON.parse(status) : false;
+  } catch (error) {
+    console.error('Failed to parse decryption status:', error);
+    return false;
+  }
 };
 
 const Context = createContext<ContextType | undefined>(undefined);
