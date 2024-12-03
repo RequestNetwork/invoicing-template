@@ -10,7 +10,6 @@ import { RequestNetwork } from '@requestnetwork/request-client.js';
 import { Web3SignatureProvider } from '@requestnetwork/web3-signature';
 import { getTheGraphClient } from '@requestnetwork/payment-detection';
 import { useEthersSigner } from './ethers'
-import { CipherProviderTypes } from '@requestnetwork/types';
 
 interface ContextType {
   requestNetwork: RequestNetwork | null;
