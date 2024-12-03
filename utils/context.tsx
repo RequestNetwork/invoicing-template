@@ -55,11 +55,12 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     try {
       const litCipherProvider = new LitProtocolProvider(
         process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
-        process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil',
+        (process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil') as 'datil',
         {
           baseURL:
             process.env.NEXT_PUBLIC_REQUEST_NODE ||
             'https://gnosis.gateway.request.network/',
+          headers: {}
         },
       );
       litCipherProvider.initializeClient();
