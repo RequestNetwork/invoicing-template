@@ -80,7 +80,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const initializeRequestNetwork = (walletClient: unknown) => {
     try {
-      const web3SignatureProvider = new Web3SignatureProvider(walletClient);
+      if (walletClient) {
+        const web3SignatureProvider = new Web3SignatureProvider(walletClient);
 
       const requestNetwork = new RequestNetwork({
         cipherProvider,
@@ -162,8 +163,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
           },
         },
       });
-
       setRequestNetwork(requestNetwork);
+      }
     } catch (error) {
       console.error('Failed to initialize the Request Network:', error);
       setRequestNetwork(null);
@@ -174,7 +175,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     signer: any,
     walletAddress: string,
   ) => {
-    if (cipherProvider) {
+    if (cipherProvider && signer && walletAddress) {
       try {
         await cipherProvider?.getSessionSignatures(signer, walletAddress);
         console.log('Connected to Cipher Provider');
@@ -204,7 +205,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   };
 
 const enableDecryption = async (option: boolean) => {
-  if (cipherProvider) {
+  if (cipherProvider && signer && address) {
     try {
       if(option) {
         await connectWalletToCipherProvider(signer, address as string);
