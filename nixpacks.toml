@@ -25,4 +25,4 @@ NPM_CONFIG_PRODUCTION = 'false'
 NEXT_TELEMETRY_DISABLED = '1'
 
 [nixpacks]
-start-command = 'npm start' 
+start-command = 'npm start'
