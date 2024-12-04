@@ -4,10 +4,10 @@ aptPkgs = ['build-essential', 'python3']
 
 [phases.install]
 cmds = [
-  'npm install -g npm@latest',
+  'npm install -g npm@10.2.4',
   'npm cache clean --force',
-  'rm -rf node_modules package-lock.json .next',
-  'npm install --legacy-peer-deps --no-optional'
+  'rm -rf node_modules .next',
+  'npm install --no-optional'
 ]
 
 [phases.build]
