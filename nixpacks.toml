@@ -18,5 +18,5 @@ cmd = 'npm start'
 
 [variables]
 NODE_ENV = 'production'
-NODE_OPTIONS = '--max_old_space_size=3072 --gc-interval=100'
+NODE_OPTIONS = '--max_old_space_size=3072'
 NPM_CONFIG_PRODUCTION = 'false' 
