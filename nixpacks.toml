@@ -1,0 +1,18 @@
+[phases.setup]
+nixPkgs = ['nodejs_18', 'python3']
+
+[phases.install]
+cmds = ['npm ci --legacy-peer-deps']
+
+[phases.build]
+cmds = [
+  'npm run build'
+]
+
+[start]
+cmd = 'npm start'
+
+[variables]
+NODE_ENV = 'production'
+NODE_OPTIONS = '--max_old_space_size=3072 --gc-interval=100'
+NPM_CONFIG_PRODUCTION = 'false' 
