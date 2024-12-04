@@ -56,6 +56,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   const instantiateCipherProvider = async () => {
     try {
       if (typeof window !== 'undefined') {
+        // FIX: This is a temporary fix to import the LitProtocolProvider only in the browser
+        // TODO: Find a better way to handle this in the Request Network SDK
         const { LitProtocolProvider } = await import('@requestnetwork/lit-protocol-cipher');
         const litCipherProvider = new LitProtocolProvider(
           process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
