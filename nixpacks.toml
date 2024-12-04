@@ -1,11 +1,13 @@
 [phases.setup]
-nixPkgs = ['nodejs_18', 'python3']
+nixPkgs = ['nodejs_18', 'python3', 'gcc', 'gnumake']
+aptPkgs = ['build-essential', 'python3']
 
 [phases.install]
 cmds = [
+  'npm install -g npm@latest',
   'npm cache clean --force',
-  'rm -rf node_modules package-lock.json',
-  'npm install --legacy-peer-deps'
+  'rm -rf node_modules package-lock.json .next',
+  'npm install --legacy-peer-deps --no-optional'
 ]
 
 [phases.build]
@@ -18,5 +20,9 @@ cmd = 'npm start'
 
 [variables]
 NODE_ENV = 'production'
-NODE_OPTIONS = '--max_old_space_size=3072'
-NPM_CONFIG_PRODUCTION = 'false' 
+NODE_OPTIONS = '--max_old_space_size=2048'
+NPM_CONFIG_PRODUCTION = 'false'
+NEXT_TELEMETRY_DISABLED = '1'
+
+[nixpacks]
+start-command = 'npm start' 
