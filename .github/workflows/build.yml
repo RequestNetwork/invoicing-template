@@ -8,6 +8,7 @@ on:
       - '**/*.{js,jsx,ts,tsx}'
       - 'package*.json'
       - '.github/workflows/build.yml'
+      - 'nixpacks.toml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
