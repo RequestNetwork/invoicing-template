@@ -1,8 +1,12 @@
 [phases.setup]
-nixPkgs = ['nodejs_18', 'python3']
+nixPkgs = ['nodejs_18', 'python3', 'gcc', 'g++', 'make']
 
 [phases.install]
-cmds = ['npm ci --legacy-peer-deps']
+cmds = [
+  'npm cache clean --force',
+  'rm -rf node_modules package-lock.json',
+  'npm install --legacy-peer-deps'
+]
 
 [phases.build]
 cmds = [
