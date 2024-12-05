@@ -1,0 +1,28 @@
+[phases.setup]
+nixPkgs = ['nodejs_18', 'python3', 'gcc', 'gnumake']
+aptPkgs = ['build-essential', 'python3']
+
+[phases.install]
+cmds = [
+  'npm install -g npm@10.2.4',
+  'npm cache clean --force',
+  'rm -rf node_modules .next',
+  'npm install --no-optional'
+]
+
+[phases.build]
+cmds = [
+  'npm run build'
+]
+
+[start]
+cmd = 'npm start'
+
+[variables]
+NODE_ENV = 'production'
+NODE_OPTIONS = '--max_old_space_size=2048'
+NPM_CONFIG_PRODUCTION = 'false'
+NEXT_TELEMETRY_DISABLED = '1'
+
+[nixpacks]
+start-command = 'npm start'
