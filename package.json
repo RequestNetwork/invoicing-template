@@ -1,6 +1,6 @@
 {
   "name": "request-network-template",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,19 +8,16 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "engines": {
-    "node": "18.x"
-  },
   "dependencies": {
     "@next/third-parties": "^14.1.0",
     "@radix-ui/react-dialog": "^1.1.0",
     "@rainbow-me/rainbowkit": "^2.2.1",
-    "@requestnetwork/create-invoice-form": "^0.11.6",
-    "@requestnetwork/invoice-dashboard": "0.11.3",
-    "@requestnetwork/lit-protocol-cipher": "0.2.0",
-    "@requestnetwork/payment-detection": "0.46.0",
-    "@requestnetwork/request-client.js": "0.51.0",
-    "@requestnetwork/web3-signature": "0.8.2",
+    "@requestnetwork/create-invoice-form": "0.11.8",
+    "@requestnetwork/invoice-dashboard": "0.11.5",
+    "@requestnetwork/lit-protocol-cipher": "0.3.0",
+    "@requestnetwork/payment-detection": "0.47.0",
+    "@requestnetwork/request-client.js": "0.52.0",
+    "@requestnetwork/web3-signature": "0.8.3",
     "@tanstack/react-query": "^5.59.14",
     "@wagmi/core": "^2.15.2",
     "class-variance-authority": "^0.7.0",
@@ -36,7 +33,7 @@
     "wagmi": "^2.13.3"
   },
   "devDependencies": {
-    "@requestnetwork/types": "^0.46.0",
+    "@requestnetwork/types": "^0.47.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
