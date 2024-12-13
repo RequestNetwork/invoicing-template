@@ -10,7 +10,10 @@ import { RequestNetwork } from '@requestnetwork/request-client.js';
 import { Web3SignatureProvider } from '@requestnetwork/web3-signature';
 import { getTheGraphClient } from '@requestnetwork/payment-detection';
 import { useEthersSigner } from './ethers'
-
+import { LitNodeClient } from '@lit-protocol/lit-node-client';
+import { LitProtocolCipherProvider } from '@requestnetwork/lit-protocol-cipher';
+import { LIT_NETWORK } from '@lit-protocol/constants';
+import { LIT_NETWORKS_KEYS } from '@lit-protocol/types';
 interface ContextType {
   requestNetwork: RequestNetwork | null;
   isWalletConnectedToCipherProvider: boolean;
@@ -55,13 +58,11 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const instantiateCipherProvider = async () => {
     try {
-      if (typeof window !== 'undefined') {
-        // FIX: This is a temporary fix to import the LitProtocolProvider only in the browser
-        // TODO: Find a better way to handle this in the Request Network SDK
-        const { LitProtocolProvider } = await import('@requestnetwork/lit-protocol-cipher');
-        const litCipherProvider = new LitProtocolProvider(
-          process.env.NEXT_PUBLIC_LIT_PROTOCOL_CHAIN || 'ethereum',
-          (process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK || 'datil') as 'datil',
+        const litNodeClient = new LitNodeClient({
+          litNetwork: process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK as LIT_NETWORKS_KEYS || LIT_NETWORK.Datil,
+        });
+        const litCipherProvider = new LitProtocolCipherProvider(
+          litNodeClient,
           {
             baseURL:
               process.env.NEXT_PUBLIC_REQUEST_NODE ||
@@ -71,17 +72,17 @@ export const Provider = ({ children }: { children: ReactNode }) => {
         );
         litCipherProvider.initializeClient();
         setCipherProvider(litCipherProvider);
-      }
+      
     } catch (error) {
       console.error('Failed to initialize Cipher Provider:', error);
       setCipherProvider(undefined);
     }
   };
 
-  const initializeRequestNetwork = (walletClient: unknown) => {
+  const initializeRequestNetwork = (wallet: unknown) => {
     try {
-      if (walletClient) {
-        const web3SignatureProvider = new Web3SignatureProvider(walletClient);
+      if (wallet) {
+        const web3SignatureProvider = new Web3SignatureProvider(wallet);
 
       const requestNetwork = new RequestNetwork({
         cipherProvider,
