@@ -10,10 +10,13 @@ import { RequestNetwork } from '@requestnetwork/request-client.js';
 import { Web3SignatureProvider } from '@requestnetwork/web3-signature';
 import { getTheGraphClient } from '@requestnetwork/payment-detection';
 import { useEthersSigner } from './ethers'
-import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LitProtocolCipherProvider } from '@requestnetwork/lit-protocol-cipher';
-import { LIT_NETWORK } from '@lit-protocol/constants';
-import { LIT_NETWORKS_KEYS } from '@lit-protocol/types';
+import dynamic from 'next/dynamic';
+
+const DynamicLitProvider = dynamic(
+  () => import('./litProvider').then(mod => mod.LitProvider),
+  { ssr: false }
+);
+
 interface ContextType {
   requestNetwork: RequestNetwork | null;
   isWalletConnectedToCipherProvider: boolean;
@@ -55,29 +58,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   ] = useState(false);
 
   const [isDecryptionEnabled, setisDecryptionEnabled] =  useState(getInitialState);
-
-  const instantiateCipherProvider = async () => {
-    try {
-        const litNodeClient = new LitNodeClient({
-          litNetwork: process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK as LIT_NETWORKS_KEYS || LIT_NETWORK.Datil,
-        });
-        const litCipherProvider = new LitProtocolCipherProvider(
-          litNodeClient,
-          {
-            baseURL:
-              process.env.NEXT_PUBLIC_REQUEST_NODE ||
-              'https://gnosis.gateway.request.network/',
-            headers: {}
-          },
-        );
-        litCipherProvider.initializeClient();
-        setCipherProvider(litCipherProvider);
-      
-    } catch (error) {
-      console.error('Failed to initialize Cipher Provider:', error);
-      setCipherProvider(undefined);
-    }
-  };
 
   const initializeRequestNetwork = (wallet: unknown) => {
     try {
@@ -224,16 +204,10 @@ const enableDecryption = async (option: boolean) => {
 
   useEffect(() => {
     if (walletClient && isConnected && address && chainId) {
-      instantiateCipherProvider();
-    }
-  }, [walletClient, chainId, address, isConnected]);
-
-  useEffect(() => {
-    if (cipherProvider) {
       initializeRequestNetwork(walletClient);
       enableDecryption(isDecryptionEnabled)
     }
-  }, [cipherProvider, walletClient]);
+  }, [walletClient, chainId, address, isConnected]);
 
   useEffect(() => {
     localStorage.setItem('isDecryptionEnabled', JSON.stringify(isDecryptionEnabled));
@@ -250,6 +224,13 @@ const enableDecryption = async (option: boolean) => {
         enableDecryption: enableDecryption,
       }}
     >
+      {walletClient && isConnected && address && chainId && (
+        <DynamicLitProvider 
+          onProviderReady={(provider) => {
+            setCipherProvider(provider);
+          }} 
+        />
+      )}
       {children}
     </Context.Provider>
   );
