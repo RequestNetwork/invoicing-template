@@ -24,32 +24,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18'
           cache: 'npm'
 
-      - name: System information
-        run: |
-          free -h
-          df -h
-          node --version
-          npm --version
-
       - name: Install dependencies
-        run: |
-          npm cache clean --force
-          npm ci --prefer-offline --no-audit --maxsockets 1
+        run: npm ci
 
       - name: Build
-        run: |
-          # Clear any cached data
-          rm -rf .next
-          # Run build with increased heap size and additional flags
-          NEXT_TELEMETRY_DISABLED=1 node --trace-deprecation --max-old-space-size=8192 node_modules/.bin/next build
+        run: npm run build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
-          NODE_OPTIONS: "--max_old_space_size=8192 --no-warnings --expose-gc"
-          NEXT_TELEMETRY_DISABLED: "1"
-          NPM_CONFIG_PRODUCTION: "false"
-          NODE_ENV: "production"
-          CI: "true"
-          NEXT_TURBO: "1"
