@@ -31,7 +31,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --no-optional
+        run: npm install --omit=optional
 
       - name: Build
         run: |  
@@ -39,7 +39,7 @@ jobs:
           npm run build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
-          NODE_OPTIONS: "--max_old_space_size=4096 --no-warnings --expose-gc"
+          NODE_OPTIONS: "--max_old_space_size=4096 --no-warnings"
           NEXT_TELEMETRY_DISABLED: "1"
           NPM_CONFIG_PRODUCTION: "false"
           NODE_ENV: "production"
