@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: node:18
+      options: --memory=4g
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,9 +31,15 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --omit=optional
 
       - name: Build
-        run: npm run build
+        run: |  
+          ulimit -S -c unlimited 
+          npm run build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
+          NODE_OPTIONS: "--max_old_space_size=4096 --no-warnings"
+          NEXT_TELEMETRY_DISABLED: "1"
+          NPM_CONFIG_PRODUCTION: "false"
+          NODE_ENV: "production"

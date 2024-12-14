@@ -25,8 +25,6 @@ interface InvoiceDashboardProps extends HTMLElement {
   wagmiConfig: WagmiConfig;
   requestNetwork: RequestNetwork;
   currencies: CurrencyTypes.CurrencyInput[];
-  isDecryptionEnabled: boolean;
-  enableDecryption: (option: boolean) => void;
 }
 
 interface CreateInvoiceFormProps extends HTMLElement {
