@@ -31,7 +31,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm --no-optional
+        run: npm install --no-optional
 
       - name: Build
         run: |  
