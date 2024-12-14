@@ -41,7 +41,7 @@ jobs:
 
       - name: Build
         run: |
-          node --trace-deprecation node_modules/.bin/next build --turbo
+          node --trace-deprecation node_modules/.bin/next build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
           NODE_OPTIONS: "--max_old_space_size=8192 --no-warnings"
@@ -49,3 +49,4 @@ jobs:
           NPM_CONFIG_PRODUCTION: "false"
           NODE_ENV: "production"
           CI: "true"
+          NEXT_TURBO: "1"
