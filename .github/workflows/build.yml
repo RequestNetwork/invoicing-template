@@ -41,5 +41,3 @@ jobs:
           NEXT_TELEMETRY_DISABLED: "1"
           NPM_CONFIG_PRODUCTION: "false"
           NODE_ENV: "production"
-          CI: "true"
-          NEXT_TURBO: "1"
