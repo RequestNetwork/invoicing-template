@@ -44,7 +44,7 @@ jobs:
           # Clear any cached data
           rm -rf .next
           # Run build with increased heap size and additional flags
-          node --trace-deprecation --max-old-space-size=8192 node_modules/.bin/next build
+          NEXT_TELEMETRY_DISABLED=1 node --trace-deprecation --max-old-space-size=8192 node_modules/.bin/next build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
           NODE_OPTIONS: "--max_old_space_size=8192 --no-warnings --expose-gc"

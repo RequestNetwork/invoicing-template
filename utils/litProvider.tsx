@@ -1,8 +1,6 @@
-import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LitProtocolCipherProvider } from '@requestnetwork/lit-protocol-cipher';
-import { LIT_NETWORK } from '@lit-protocol/constants';
-import { LIT_NETWORKS_KEYS } from '@lit-protocol/types';
 import { useEffect, useRef } from 'react';
+import type { LitProtocolCipherProvider } from '@requestnetwork/lit-protocol-cipher';
+import type { LIT_NETWORKS_KEYS } from '@lit-protocol/types';
 
 interface LitProviderProps {
   onProviderReady: (provider: LitProtocolCipherProvider | undefined) => void;
@@ -13,10 +11,22 @@ export function LitProvider({ onProviderReady }: LitProviderProps) {
 
   const initializeLit = async () => {
     try {
+      // Dynamic imports to reduce initial bundle size
+      const [
+        { LitNodeClient },
+        { LitProtocolCipherProvider },
+        { LIT_NETWORK }
+      ] = await Promise.all([
+        import('@lit-protocol/lit-node-client'),
+        import('@requestnetwork/lit-protocol-cipher'),
+        import('@lit-protocol/constants')
+      ]);
+
       const litNodeClient = new LitNodeClient({
-        litNetwork: process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK as LIT_NETWORKS_KEYS || LIT_NETWORK.Datil,
+        litNetwork: (process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK as LIT_NETWORKS_KEYS) || LIT_NETWORK.Datil,
         debug: false,
       });
+
       const litCipherProvider = new LitProtocolCipherProvider(
         litNodeClient,
         {
@@ -26,6 +36,7 @@ export function LitProvider({ onProviderReady }: LitProviderProps) {
           headers: {}
         },
       );
+
       await litCipherProvider.initializeClient();
       litProviderRef.current = litCipherProvider;
       onProviderReady(litCipherProvider);
