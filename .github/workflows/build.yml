@@ -37,13 +37,14 @@ jobs:
       - name: Install dependencies
         run: |
           npm cache clean --force
-          npm ci --prefer-offline --no-audit
+          npm ci --prefer-offline --no-audit --maxsockets 1
 
       - name: Build
-        run: npm run build
+        run: |
+          node --trace-deprecation node_modules/.bin/next build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
-          NODE_OPTIONS: "--max_old_space_size=6144"
+          NODE_OPTIONS: "--max_old_space_size=8192 --no-warnings"
           NEXT_TELEMETRY_DISABLED: "1"
           NPM_CONFIG_PRODUCTION: "false"
           NODE_ENV: "production"
