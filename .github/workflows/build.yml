@@ -35,7 +35,7 @@ jobs:
 
       - name: Build
         run: |  
-          ulimit -c unlimited  
+          ulimit -S -c unlimited 
           npm run build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
