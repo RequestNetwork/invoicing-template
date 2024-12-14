@@ -15,6 +15,7 @@ export function LitProvider({ onProviderReady }: LitProviderProps) {
     try {
       const litNodeClient = new LitNodeClient({
         litNetwork: process.env.NEXT_PUBLIC_LIT_PROTOCOL_NETWORK as LIT_NETWORKS_KEYS || LIT_NETWORK.Datil,
+        debug: false,
       });
       const litCipherProvider = new LitProtocolCipherProvider(
         litNodeClient,
@@ -25,7 +26,7 @@ export function LitProvider({ onProviderReady }: LitProviderProps) {
           headers: {}
         },
       );
-      litCipherProvider.initializeClient();
+      await litCipherProvider.initializeClient();
       litProviderRef.current = litCipherProvider;
       onProviderReady(litCipherProvider);
     } catch (error) {
@@ -34,13 +35,25 @@ export function LitProvider({ onProviderReady }: LitProviderProps) {
     }
   };
 
-  // Initialize on mount
   useEffect(() => {
-    initializeLit();
+    let mounted = true;
+
+    const init = async () => {
+      if (mounted) {
+        await initializeLit();
+      }
+    };
+
+    init();
+
     return () => {
-      litProviderRef.current?.disconnectClient?.();
+      mounted = false;
+      if (litProviderRef.current?.disconnectClient) {
+        litProviderRef.current.disconnectClient();
+        litProviderRef.current = null;
+      }
     };
   }, []);
 
-  return null; // This component doesn't render anything
+  return null;
 }
