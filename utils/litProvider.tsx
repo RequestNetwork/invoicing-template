@@ -2,13 +2,15 @@ import { LitNodeClient } from '@lit-protocol/lit-node-client';
 import { LitProtocolCipherProvider } from '@requestnetwork/lit-protocol-cipher';
 import { LIT_NETWORK } from '@lit-protocol/constants';
 import { LIT_NETWORKS_KEYS } from '@lit-protocol/types';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface LitProviderProps {
-  onProviderReady: (provider: any) => void;
+  onProviderReady: (provider: LitProtocolCipherProvider | undefined) => void;
 }
 
 export function LitProvider({ onProviderReady }: LitProviderProps) {
+  const litProviderRef = useRef<LitProtocolCipherProvider | null>(null);
+
   const initializeLit = async () => {
     try {
       const litNodeClient = new LitNodeClient({
@@ -24,6 +26,7 @@ export function LitProvider({ onProviderReady }: LitProviderProps) {
         },
       );
       litCipherProvider.initializeClient();
+      litProviderRef.current = litCipherProvider;
       onProviderReady(litCipherProvider);
     } catch (error) {
       console.error('Failed to initialize Cipher Provider:', error);
@@ -34,6 +37,9 @@ export function LitProvider({ onProviderReady }: LitProviderProps) {
   // Initialize on mount
   useEffect(() => {
     initializeLit();
+    return () => {
+      litProviderRef.current?.disconnectClient?.();
+    };
   }, []);
 
   return null; // This component doesn't render anything
