@@ -53,6 +53,3 @@ jobs:
           NODE_ENV: "production"
           CI: "true"
           NEXT_TURBO: "1"
-          # Add memory management flags
-          GENERATE_SOURCEMAP: "false"
-          NEXT_MINIMAL: "1"
