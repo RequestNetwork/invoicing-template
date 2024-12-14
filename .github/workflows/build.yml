@@ -34,7 +34,9 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: |  
+          ulimit -c unlimited  
+          npm run build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
           NODE_OPTIONS: "--max_old_space_size=4096 --no-warnings --expose-gc"
