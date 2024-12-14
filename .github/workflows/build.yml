@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:22
-      options: --memory=4g
+      options: --memory=2g
     steps:
       - name: Checkout
         uses: actions/checkout@v4
