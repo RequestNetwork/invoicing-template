@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:22
-      options: --memory=2g
+      options: --memory=4g
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,3 +37,9 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
+          NODE_OPTIONS: "--max_old_space_size=4096 --no-warnings --expose-gc"
+          NEXT_TELEMETRY_DISABLED: "1"
+          NPM_CONFIG_PRODUCTION: "false"
+          NODE_ENV: "production"
+          CI: "true"
+          NEXT_TURBO: "1"
