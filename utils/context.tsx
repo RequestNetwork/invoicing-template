@@ -9,7 +9,6 @@ import { useAccount, useWalletClient } from 'wagmi';
 import { RequestNetwork } from '@requestnetwork/request-client.js';
 import { Web3SignatureProvider } from '@requestnetwork/web3-signature';
 import { getTheGraphClient } from '@requestnetwork/payment-detection';
-import { useEthersSigner } from './ethers'
 import dynamic from 'next/dynamic';
 
 const DynamicLitProvider = dynamic(
@@ -20,33 +19,13 @@ const DynamicLitProvider = dynamic(
 interface ContextType {
   requestNetwork: RequestNetwork | null;
   isWalletConnectedToCipherProvider: boolean;
-  connectWalletToCipherProvider: (
-    signer: unknown,
-    walletAddress: string,
-  ) => void;
   disconnectWalletFromCipherProvider: () => void;
-  isDecryptionEnabled: boolean;
-  enableDecryption: (option: boolean) => void;
 }
-
-const getInitialState = () => {
-  let status;
-  if (typeof window !== "undefined") {
-    status = localStorage?.getItem('isDecryptionEnabled');
-  }
-  try {
-    return status ? JSON.parse(status) : false;
-  } catch (error) {
-    console.error('Failed to parse decryption status:', error);
-    return false;
-  }
-};
 
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const { data: walletClient } = useWalletClient();
-  const signer = useEthersSigner()
   const { address, isConnected, chainId } = useAccount();
   const [requestNetwork, setRequestNetwork] = useState<RequestNetwork | null>(
     null,
@@ -57,12 +36,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     setIsWalletConnectedToCipherProvider,
   ] = useState(false);
 
-  const [isDecryptionEnabled, setisDecryptionEnabled] =  useState(getInitialState);
-
-  const initializeRequestNetwork = (wallet: unknown) => {
+  const initializeRequestNetwork = () => {
     try {
-      if (wallet) {
-        const web3SignatureProvider = new Web3SignatureProvider(wallet);
+      if (walletClient) {
+        const web3SignatureProvider = new Web3SignatureProvider(walletClient);
 
       const requestNetwork = new RequestNetwork({
         cipherProvider,
@@ -152,22 +129,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const connectWalletToCipherProvider = async (
-    signer: any,
-    walletAddress: string,
-  ) => {
-    if (cipherProvider && signer && walletAddress) {
-      try {
-        await cipherProvider?.getSessionSignatures(signer, walletAddress);
-        console.log('Connected to Cipher Provider');
-        setIsWalletConnectedToCipherProvider(true);
-      } catch (error) {
-        console.error('Failed to connect to Cipher Provider:', error);
-        setIsWalletConnectedToCipherProvider(false);
-      }
-    }
-  };
-
   const disconnectWalletFromCipherProvider = () => {
     if (cipherProvider) {
       try {
@@ -185,43 +146,19 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-const enableDecryption = async (option: boolean) => {
-  if (cipherProvider && signer && address) {
-    try {
-      if(option) {
-        await connectWalletToCipherProvider(signer, address as string);
-      } 
-      cipherProvider.enableDecryption(option);
-      setisDecryptionEnabled(option);
-    } catch (error) {
-      console.error('Failed to enable/disable decryption:', error);
-      setisDecryptionEnabled(false);
-    }
-  } else {
-    setisDecryptionEnabled(false);
-  }
-};
-
   useEffect(() => {
-    if (walletClient && isConnected && address && chainId) {
-      initializeRequestNetwork(walletClient);
-      enableDecryption(isDecryptionEnabled)
+    if (walletClient && cipherProvider) {
+      initializeRequestNetwork();
     }
-  }, [walletClient, chainId, address, isConnected]);
+  }, [walletClient, cipherProvider]);
 
-  useEffect(() => {
-    localStorage.setItem('isDecryptionEnabled', JSON.stringify(isDecryptionEnabled));
-  }, [isDecryptionEnabled])
 
   return (
     <Context.Provider
       value={{
         requestNetwork,
         isWalletConnectedToCipherProvider,
-        connectWalletToCipherProvider,
-        disconnectWalletFromCipherProvider,
-        isDecryptionEnabled,
-        enableDecryption: enableDecryption,
+        disconnectWalletFromCipherProvider
       }}
     >
       {walletClient && isConnected && address && chainId && (
