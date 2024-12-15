@@ -38,7 +38,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   const initializeRequestNetwork = () => {
     try {
-      if (walletClient) {
+      if (walletClient && cipherProvider) {
         const web3SignatureProvider = new Web3SignatureProvider(walletClient);
 
       const requestNetwork = new RequestNetwork({
@@ -158,7 +158,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
       value={{
         requestNetwork,
         isWalletConnectedToCipherProvider,
-        disconnectWalletFromCipherProvider
+        disconnectWalletFromCipherProvider,
       }}
     >
       {walletClient && isConnected && address && chainId && (
