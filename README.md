@@ -116,6 +116,36 @@ The following chains are supported in the current setup:
 - Avalanche
 - Gnosis
 
+### Currencies
+
+- The currencies prop is optional.
+- If provided, it overrides the default list of supported currencies.
+- To retain the default list of currencies, simply omit the currencies prop.
+
+#### Passing Custom Currencies
+
+To override the default currencies, provide a custom list in the correct format:
+
+```ts
+export const currencies: CurrencyTypes.CurrencyInput[] = [
+  {
+    symbol: "FAU",
+    address: "0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C",
+    network: "sepolia",
+    decimals: 18,
+    type: RequestLogicTypes.CURRENCY.ERC20,
+  },
+  {
+    symbol: "ETH",
+    network: "sepolia",
+    decimals: 18,
+    type: RequestLogicTypes.CURRENCY.ETH,
+  },
+];
+```
+
+When added, this will replace the default currencies list. To retain the defaults, do not include the `currencies` prop.
+
 ### Wallets
 
 The following wallets are grouped into two categories:
