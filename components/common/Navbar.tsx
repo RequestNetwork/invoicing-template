@@ -16,9 +16,7 @@ import { useAppContext } from "@/utils/context";
 
 const Navbar = () => {
   const router = useRouter();
-  const account = useAccount();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { disconnectWalletFromCipherProvider } = useAppContext()
 
   const links = [
     {
@@ -41,22 +39,6 @@ const Navbar = () => {
       href: "https://discord.com/channels/468974345222619136/1103420140181274645",
     },
   ];
-
-  useEffect(() => {
-    const handleConnection = async () => {
-      try {
-        if (!account.isConnected) {
-          disconnectWalletFromCipherProvider();
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error('Error while disconnecting from cipher provider:', error.message);
-        }
-      }
-    };
-
-    handleConnection();
-  }, [account.isConnected, disconnectWalletFromCipherProvider]);
 
   return (
     <nav className="relative h-full flex items-center p-[20px] gap-[20px] xl:gap-[60px] bg-white shadow-small mb-[30px] tablet:mb-[80px]">

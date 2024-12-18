@@ -18,8 +18,6 @@ const DynamicLitProvider = dynamic(
 
 interface ContextType {
   requestNetwork: RequestNetwork | null;
-  isWalletConnectedToCipherProvider: boolean;
-  disconnectWalletFromCipherProvider: () => void;
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
@@ -31,10 +29,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     null,
   );
   const [cipherProvider, setCipherProvider] = useState<any>();
-  const [
-    isWalletConnectedToCipherProvider,
-    setIsWalletConnectedToCipherProvider,
-  ] = useState(false);
 
   const initializeRequestNetwork = () => {
     try {
@@ -129,23 +123,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const disconnectWalletFromCipherProvider = () => {
-    if (cipherProvider) {
-      try {
-        setRequestNetwork(null);
-        cipherProvider?.disconnectWallet();
-        setIsWalletConnectedToCipherProvider(false);
-        setCipherProvider(undefined);
-      } catch (error) {
-        console.error('Failed to disconnect from Cipher Provider:', error);
-        // Still reset state to ensure clean disconnection
-        setIsWalletConnectedToCipherProvider(false);
-        setCipherProvider(undefined);
-        setRequestNetwork(null);
-      }
-    }
-  };
-
   useEffect(() => {
     if (walletClient && cipherProvider) {
       initializeRequestNetwork();
@@ -157,8 +134,6 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     <Context.Provider
       value={{
         requestNetwork,
-        isWalletConnectedToCipherProvider,
-        disconnectWalletFromCipherProvider,
       }}
     >
       {walletClient && isConnected && address && chainId && (
