@@ -53,90 +53,6 @@ export const createFormCurrencies: CurrencyTypes.CurrencyInput[] = [
     type: RequestLogicTypes.CURRENCY.ERC20,
   },
   {
-    symbol: "AXS",
-    address: "0xBB0E17EF65F82Ab018d8EDd776e8DD940327B28b",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "AUDIO",
-    address: "0x18aAA7115705e8be94bfFEBDE57Af9BFc265B998",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "RAI",
-    address: "0x03ab458634910AaD20eF5f1C8ee96F1D6ac54919",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "SYLO",
-    address: "0xf293d23BF2CDc05411Ca0edDD588eb1977e8dcd4",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "LDO",
-    address: "0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "UST",
-    address: "0xa47c8bf37f92aBed4A126BDA807A7b7498661acD",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "MNT",
-    address: "0x3c3a81e81dc49A522A592e7622A7E711c06bf354",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "MIR",
-    address: "0x09a3EcAFa817268f77BE1283176B946C4ff2E608",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "INJ",
-    address: "0xe28b3B32B6c345A34Ff64674606124Dd5Aceca30",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "OCEAN",
-    address: "0x967da4048cD07aB37855c090aAF366e4ce1b9F48",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "ANKR",
-    address: "0x8290333ceF9e6D528dD5618Fb97a76f268f3EDD4",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "RLY",
-    address: "0xf1f955016EcbCd7321c7266BccFB96c68ea5E49b",
-    network: "mainnet",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
     symbol: "REQ",
     address: "0x8f8221aFbB33998d8584A2B05749bA73c37a938a",
     network: "mainnet",
@@ -204,28 +120,6 @@ export const createFormCurrencies: CurrencyTypes.CurrencyInput[] = [
     type: RequestLogicTypes.CURRENCY.ERC20,
   },
 
-  // Avalanche
-  {
-    symbol: "USDC",
-    address: "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
-    network: "avalanche",
-    decimals: 6,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "USDT",
-    address: "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
-    network: "avalanche",
-    decimals: 6,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-  {
-    symbol: "AVAX",
-    network: "avalanche",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ETH,
-  },
-
   // Optimism
   {
     symbol: "USDC",
@@ -251,39 +145,6 @@ export const createFormCurrencies: CurrencyTypes.CurrencyInput[] = [
   {
     symbol: "ETH",
     network: "optimism",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ETH,
-  },
-
-  // Moonbeam
-  {
-    symbol: "USDC",
-    address: "0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b", // multichain
-    network: "moonbeam",
-    decimals: 6,
-    type: RequestLogicTypes.CURRENCY.ERC20,
-  },
-
-  // Fantom
-  {
-    symbol: "FTM",
-    network: "fantom",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ETH,
-  },
-
-  // Mantle
-  {
-    symbol: "MNT",
-    network: "mantle",
-    decimals: 18,
-    type: RequestLogicTypes.CURRENCY.ETH,
-  },
-
-  // zkSync Era
-  {
-    symbol: "ETH",
-    network: "zksyncera",
     decimals: 18,
     type: RequestLogicTypes.CURRENCY.ETH,
   },
