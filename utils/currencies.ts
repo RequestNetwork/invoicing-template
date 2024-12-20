@@ -1,6 +1,33 @@
 import { RequestLogicTypes, CurrencyTypes } from "@requestnetwork/types";
 
 export const createFormCurrencies: CurrencyTypes.CurrencyInput[] = [
+  // Fiat
+  {
+    symbol: "USD",
+    decimals: 2,
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    symbol: "EUR",
+    decimals: 2,
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    symbol: "GBP",
+    decimals: 2,
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    symbol: "JPY",
+    decimals: 0,
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    symbol: "CNY",
+    decimals: 2,
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+
   // Sepolia Testnet
   {
     symbol: "FAU",
