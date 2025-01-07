@@ -1,6 +1,84 @@
 import { RequestLogicTypes, CurrencyTypes } from "@requestnetwork/types";
 
 export const createFormCurrencies: CurrencyTypes.CurrencyInput[] = [
+  // FIAT
+  {
+    decimals: 2,
+    symbol: "USD",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "EUR",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "AUD",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "BRL",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "CAD",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "CHF",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "CNY",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+
+  {
+    decimals: 2,
+    symbol: "GBP",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "IDR",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "INR",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 0,
+    symbol: "JPY",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 0,
+    symbol: "KRW",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "NZD",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "SGD",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+  {
+    decimals: 2,
+    symbol: "TRY",
+    type: RequestLogicTypes.CURRENCY.ISO4217,
+  },
+
   // Sepolia Testnet
   {
     symbol: "FAU",
@@ -11,14 +89,14 @@ export const createFormCurrencies: CurrencyTypes.CurrencyInput[] = [
   },
   {
     symbol: "fUSDT",
-    address: "0x7169D38820dfd117C3FA1f22a697dBA58d90BA06",
+    address: "0xF046b3CA5ae2879c6bAcC4D42fAF363eE8379F78",
     network: "sepolia",
     decimals: 6,
     type: RequestLogicTypes.CURRENCY.ERC20,
   },
   {
     symbol: "fUSDC",
-    address: "0x8267cF9254734C6Eb452a7bb9AAF97B392258b21",
+    address: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
     network: "sepolia",
     decimals: 6,
     type: RequestLogicTypes.CURRENCY.ERC20,
