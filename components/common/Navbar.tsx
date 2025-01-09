@@ -49,7 +49,7 @@ const Navbar = () => {
         className="mr-auto tablet:mr-0"
       >
         <img
-          src="assets/logo.svg"
+          src="/assets/logo.svg"
           alt="Request Network Logo"
           className="w-[100px] xl:w-[120px]"
         />
