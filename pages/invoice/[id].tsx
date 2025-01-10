@@ -9,7 +9,7 @@ import { rainbowKitConfig as wagmiConfig } from "@/utils/wagmiConfig";
 
 const SingeInvoiceComponent = dynamic(
   () => import("@requestnetwork/single-invoice/react"),
-  { ssr: false, loading: () => <Spinner /> }
+  { loading: () => <Spinner /> }
 );
 
 const SingleInvoice = ({ invoiceId }: { invoiceId: string }) => {
@@ -48,7 +48,7 @@ export default SingleInvoice;
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const path = req.url ?? "";
-  const invoiceId = path.split("single-invoice/")[1] ?? null;
+  const invoiceId = path.split("invoice/")[1] ?? null;
 
   return {
     props: {
