@@ -18,6 +18,7 @@ const DynamicLitProvider = dynamic(
 
 interface ContextType {
   requestNetwork: RequestNetwork | null;
+  initializeRequestNetwork: () => void;
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
@@ -135,6 +136,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     <Context.Provider
       value={{
         requestNetwork,
+        initializeRequestNetwork,
       }}
     >
       {walletClient && isConnected && address && chainId && (
