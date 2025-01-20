@@ -7,7 +7,7 @@ import { Spinner } from "@/components/ui";
 import { useAppContext } from "@/utils/context";
 import { rainbowKitConfig as wagmiConfig } from "@/utils/wagmiConfig";
 
-const SingeInvoiceComponent = dynamic(
+const SingleInvoiceComponent = dynamic(
   () => import("@requestnetwork/single-invoice/react"),
   { loading: () => <Spinner /> }
 );
@@ -33,7 +33,7 @@ const SingleInvoice = ({ invoiceId }: { invoiceId: string }) => {
         <title>Request Invoicing - Single Invoice</title>
       </Head>
       <div className="container m-auto w-[100%]">
-        <SingeInvoiceComponent
+        <SingleInvoiceComponent
           config={config}
           requestId={invoiceId}
           requestNetwork={requestNetwork}
