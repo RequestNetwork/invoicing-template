@@ -22,6 +22,7 @@ export default function InvoiceDashboardPage() {
           config={config}
           requestNetwork={requestNetwork}
           wagmiConfig={wagmiConfig}
+          singleInvoicePath="/invoice"
         />
       </div>
     </>

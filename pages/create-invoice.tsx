@@ -4,7 +4,6 @@ import { rainbowKitConfig as wagmiConfig } from "@/utils/wagmiConfig";
 import { config } from "@/utils/config";
 import { Spinner } from "@/components/ui";
 import { useAppContext } from "@/utils/context";
-import { createFormCurrencies } from "@/utils/currencies";
 
 const CreateInvoiceForm = dynamic(
   () => import("@requestnetwork/create-invoice-form/react"),
@@ -24,7 +23,6 @@ export default function CreateInvoice() {
           config={config}
           wagmiConfig={wagmiConfig}
           requestNetwork={requestNetwork}
-          currencies={createFormCurrencies}
         />
       </div>
     </>

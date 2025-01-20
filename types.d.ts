@@ -24,12 +24,12 @@ interface InvoiceDashboardProps extends HTMLElement {
   config: IConfig;
   wagmiConfig: WagmiConfig;
   requestNetwork: RequestNetwork;
-  currencies: CurrencyTypes.CurrencyInput[];
+  currencies?: CurrencyTypes.CurrencyInput[];
 }
 
 interface CreateInvoiceFormProps extends HTMLElement {
   config: IConfig;
   wagmiConfig: WagmiConfig;
   requestNetwork: RequestNetwork;
-  currencies: CurrencyTypes.CurrencyInput[];
+  currencies?: CurrencyTypes.CurrencyInput[];
 }
