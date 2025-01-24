@@ -23,6 +23,7 @@ export default function CreateInvoice() {
           config={config}
           wagmiConfig={wagmiConfig}
           requestNetwork={requestNetwork}
+          singleInvoicePath="/"
         />
       </div>
     </>
