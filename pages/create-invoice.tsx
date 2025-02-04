@@ -22,8 +22,7 @@ export default function CreateInvoice() {
         <CreateInvoiceForm
           config={config}
           wagmiConfig={wagmiConfig}
-          // TODO: fix type mismatch in the web component
-          requestNetwork={requestNetwork as any}
+          requestNetwork={requestNetwork}
           singleInvoicePath="/"
         />
       </div>
