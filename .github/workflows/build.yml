@@ -17,10 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    container:
-      image: node:18
-      options: --memory=8g
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,12 +37,12 @@ jobs:
 
       - name: Build
         run: |
-          ulimit -S -c unlimited
           npm run build
         env:
           NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID }}
-          NODE_OPTIONS: "--max_old_space_size=7680"
-          NEXT_TELEMETRY_DISABLED: "1"
-          NPM_CONFIG_PRODUCTION: "false"
           NODE_ENV: "production"
-        timeout-minutes: 10
+
+          # Set --max_old_space_size to 15 GiB
+          # Default is 16 GiB. Leave 1 GiB for the system.
+          # Ref: https://docs.github.com/en/enterprise-cloud@latest/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+          NODE_OPTIONS: "--max-old-space-size=15360"
