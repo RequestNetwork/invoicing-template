@@ -84,7 +84,7 @@ const Navbar = () => {
         </a>
         <ConnectButton />
         <Button
-          text="Book a demo"
+          text="Get in touch"
           href={process.env.NEXT_PUBLIC_DEMO_URL}
           anchorProps={{ target: "_blank", rel: "noreferrer noopener" }}
         />
@@ -129,7 +129,7 @@ const Navbar = () => {
             </li>
             <li>
               <Button
-                text="Book a demo"
+                text="Get in touch"
                 href={process.env.NEXT_PUBLIC_DEMO_URL}
               />
             </li>
